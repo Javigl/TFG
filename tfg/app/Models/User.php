@@ -20,6 +20,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'lastname',
+        'dni',
+        'telephone',
+        'points',
+        'admin',
+        'balance',
+        'blocked'
     ];
 
     /**
@@ -40,4 +47,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $guarded=[];
+
+    public function cars(){
+        return $this->hasMany('App\Models\Car');
+    }
+
+    public function travels(){
+        return $this->hasMany('App\Models\Travel');
+    }
+
+    public function raters(){
+        return $this->hasMany('App\Models\Rating');
+    }
+
+    public function is_evaluated(){
+        return $this->hasMany('App\Models\Rating');
+    }
+
+    public function is_passenger(){
+        return $this->belongsToMany('App\Models\Travel');
+    }
 }
