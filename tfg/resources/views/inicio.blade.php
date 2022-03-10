@@ -209,8 +209,56 @@
                         </div>
                     </article>
                 </section>
+
+                <section class="question__offer">
+                    <h2 class="subtitle">¿Estás listo para hacer cosas?</h2>
+                    <p class="questions__copy">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda accusantium, maiores delectus suscipit praesentium illum facilis, 
+                        perferendis dignissimos molestiae ipsum ad vel necessitatibus quisquam, velit mollitia adipisci unde tempora dolor labore quae sed. Vitae magnam possimus odit consequuntur provident sequi.</p>
+                        <a href="#" class="cta">Dale ya!</a>
+                </section>
             </section>
         </main>
+
+        <footer class="footer">
+            <section class="footer__container container">
+                <nav class="nav nav--footer">
+                    <h2 class="footer__title">Paginita chula chula</h2>
+
+                    <ul class="nav__link nav__link--footer">
+                        <li class="nav__items">
+                            <a href="#" class="nav__links">Inicio</a>
+                        </li>
+                        <li class="nav__items">
+                            <a href="#" class="nav__links">A cerca de</a>
+                        </li>
+                        <li class="nav__items">
+                            <a href="#" class="nav__links">Contacto</a>
+                        </li>
+                        <li class="nav__items">
+                            <a href="#" class="nav__links">Iniciar Sesión</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <form class="footer__form">
+                    <h2 class="footer__newsletter">Suscríbete ya</h2>
+                    <div class="footer__inputs">
+                        <input type="email" placeholder="Email:" class="footer__input">
+                        <input type="submit" value="Regístrate" class="footer__submit">
+                    </div>
+                </form>
+            </section>
+
+            <section class="footer__copy container">
+                <div class="footer_social">
+                    <a href="#" class="footer__icons"><img src="" class="footer__img"></a>
+                    <a href="#" class="footer__icons"><img src="" class="footer__img"></a>
+                    <a href="#" class="footer__icons"><img src="" class="footer__img"></a>
+                </div>
+
+                <h3 class="footer__copyright">Derechos reservados &copy; Javier García Lillo</h3>
+            </section>
+        </footer>
         <script src="{{asset('js/slider.js')}}"></script>
         <script src="{{asset('js/questions.js')}}"></script>
     </body>
