@@ -34,7 +34,7 @@
             
             <section class="hero__container container">
                 <h1 class="hero__title">Únete y comparte tus viajes y vehículos</h1>
-                <p class="hero__paragraph">Registrate ya para comenzar tu experiencia con CarSite</p>
+                <p class="hero__paragraph">Regístrate ya para comenzar tu experiencia con CarSite</p>
                 <a href="{{route('register')}}" class="cta">Comienza ahora</a>
             </section>
         </header>

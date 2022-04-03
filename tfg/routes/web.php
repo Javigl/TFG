@@ -16,11 +16,26 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', function () {
-    return view('welcome');
+    $user = Auth::user();
+    if($user){
+        if($user->admin){
+            return redirect('/admin');
+        }
+        return redirect('/user');
+    }
+    return redirect('/inicio');
 });
 
 Route::get('/inicio', function () {
     return view('inicio');
+});
+
+Route::get('/user', function () {
+    return view('user.menuUser');
+});
+
+Route::get('/admin', function () {
+    return view('admin.menuAdmin');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

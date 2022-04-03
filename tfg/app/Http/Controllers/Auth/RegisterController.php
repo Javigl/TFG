@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -29,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = "/login";
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -50,12 +52,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'lastname' => ['required', 'string', 'min:3', 'max:255'],
-            'dni' => ['required', 'string', 'min:9', 'max:9', 'unique:users'],
-            'telephone' => ['required', 'integer'],
+            'name' => ['required', 'string', 'max:25'],
+            'email' => ['required', 'string', 'email', 'max:25', 'unique:users'],
+            'password' => ['required', 'string', 'confirmed'],
+            'lastname' => ['required', 'string', 'max:25'],
+            'dni' => ['required', 'unique:users', 'regex:/^[0-9]{8}[T|R|W|A|G|M|T|F|P|D|X|B|N|J|Z|S|Q|V|H|L|C|K|E]$/'],
+            'telephone' => ['required', 'integer', 'regex:/^[0-9]{9}$/'],
         ]);
     }
 
@@ -71,6 +73,23 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'lastname' => $data['lastname'],
+            'dni' => $data['dni'],
+            'telephone' => $data['telephone'],
+            'points' => 0,
+            'admin' => false,
+            'balance' => 0.0,
+            'blocked' => false,
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        return $this->registered($request, $user)
+                        ?: redirect('/login');
     }
 }
