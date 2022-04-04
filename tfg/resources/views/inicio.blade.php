@@ -162,8 +162,8 @@
                 <h3 class="footer__copyright">Derechos reservados &copy; Javier García Lillo</h3>
             </section>
         </footer>
-        <script src="{{asset('js/slider.js')}}"></script>
         <script src="{{asset('js/questions.js')}}"></script>
+        <script src="{{asset('js/menu.js')}}"></script>
     </body>
 </html>
 
