@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Auth::routes();
 
 Route::get('/', function () {
@@ -30,12 +19,20 @@ Route::get('/inicio', function () {
     return view('inicio');
 });
 
-Route::get('/user', function () {
-    return view('user.menuUser');
+Route::middleware('user')->group(function(){
+    Route::get('/user',[App\Http\Controllers\UserController::class, 'viajes']);
+    Route::get('/viajes',[App\Http\Controllers\UserController::class, 'viajes']);
+    Route::get('/reservarViaje/{id}', [App\Http\Controllers\UserController::class, 'confirmarReservaViaje']);
+    Route::post('/reservarViaje/{id}', [App\Http\Controllers\UserController::class, 'reservarViaje']);
+    Route::get('/cancelarViaje/{id}', [App\Http\Controllers\UserController::class, 'cancelarViaje']);
+    Route::get('/alquileres',[App\Http\Controllers\UserController::class, 'alquileres']);
+    Route::get('/misalquileres',[App\Http\Controllers\UserController::class, 'misalquileres']);
+    Route::get('/misviajes',[App\Http\Controllers\UserController::class, 'misviajes']);
+    Route::get('/valoraciones',[App\Http\Controllers\UserController::class, 'valoraciones']);
+    Route::get('/saldo',[App\Http\Controllers\UserController::class, 'saldo']);
 });
 
-Route::get('/admin', function () {
-    return view('admin.menuAdmin');
+Route::middleware('admin')->group(function(){
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'menu']);
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
