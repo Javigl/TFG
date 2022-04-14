@@ -18,7 +18,7 @@ class CreateRentalsTable extends Migration
             $table->string('city');
             $table->date('pickUpDate');
             $table->date('returnDate');
-            $table->float('price/day');
+            $table->float('price');
             $table->unsignedBigInteger('car_id');
             $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade'); 
             $table->timestamps();

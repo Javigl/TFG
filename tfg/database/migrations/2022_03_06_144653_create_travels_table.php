@@ -20,7 +20,7 @@ class CreateTravelsTable extends Migration
             $table->date('date');
             $table->time('hour');
             $table->integer('places');
-            $table->float('price/place');
+            $table->float('price');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
             $table->timestamps();

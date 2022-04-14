@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TravelUser extends Model
 {
     use HasFactory;
-    protected $guarded = [];
     protected $table = 'travel_users';
+    protected $guarded = [];
 
 }
