@@ -30,20 +30,14 @@
             </div>
             <div class="col-xl-7 col-lg-12 d-flex">
                 <div class="container align-self-center p-6">
-                    <h1 class="mb-3"><b>Unirse a viaje</b></h1>
-                    <p class="text-muted mb-5">Estás a punto de unirte a un viaje hacia {{$viaje->destination}} de la mano de {{$viaje->user->name}}</p>
-                    <p style="text-align: left">Introduce el número de carpoints que deseas utilizar en caso de que quieras obtener un descuento en tu viaje(1CP=0,5€/desc)</p>
-                    <form method="POST" action="/reservarViaje/{{$viaje->id}}">
+                    <h1 class="mb-3"><b>Añadir saldo</b></h1>
+                    <p style="text-align: left">Introduce el importe que deseas añadir a tu saldo actual (Saldo actual: {{Auth::user()->balance}}€)</p>
+                    <form method="POST" action="/saldo">
                         @csrf
                         <div class="row mb-2">
                             <div class="form-group col-md-6">
-                                <label for="carpoints"><b>CarPoints</b></label>
-                                <input type="number" class="form-control" id="carpoints" name="carpoints" placeholder="Introduce el número de carpoints" min="0" autofocus>
-                                @error('carpoints')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <label for="saldo"><b>Saldo(€)</b></label>
+                                <input type="number" class="form-control" id="saldo" name="saldo" step="0.01" placeholder="Introduce la cantidad a añadir" min="0" autofocus>
                             </div>
                         </div>
                         <br>
@@ -54,7 +48,7 @@
                             <br/>
                             <br/>
                         @endif
-                        <button type="submit" class="btn btn-primary width-100">Confirmar reserva</button>
+                        <button type="submit" class="btn btn-primary width-100">Añadir saldo</button>
                         <a href="/viajes" role="button" class="btn btn-danger width-100">Volver</a>
                     </form>
                     <small class="d-inline-block text-muted mt-5">Derechos reservados &copy; Javier García Lillo</small>
