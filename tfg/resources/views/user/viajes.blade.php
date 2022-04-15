@@ -2,6 +2,15 @@
 @section('content')
 <section class="travels container">
     <h2 class="subtitle">Obtén tu viaje ideal</h2>
+    <br/>
+    <br/>
+    @if (\Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            <strong style="font-size: 20px">{!! \Session::get('success') !!}</strong>
+        </div>
+        <br/>
+        <br/>
+    @endif
     <div class="price__table">
         @foreach($viajes as $v)
             <?php
@@ -18,11 +27,7 @@
                 </div>
 
                 @if(!is_null($travelUser))
-                    <form name="formEliminar" action="/cancelarViaje/{{$v->id}}" class="d-inline" method="POST">
-                        @method('DELETE')
-                        @csrf
-                        <a type="button" class="javascript: submitForm() price__cta desunirme">Desunirme</a>
-                    </form>
+                    <a href="/cancelarViaje/{{$v->id}}" class="price__cta desunirme">Desunirme</a>
                 @elseif($v->places > 0)
                     <a href="/reservarViaje/{{$v->id}}" class="price__cta free">Unirme</a>
                 @else
@@ -32,32 +37,4 @@
         @endforeach
     </div>
 </section>
-<script type="text/javascript"> 
-    function submitForm(){
-        document.formEliminar.submit();
-    }
-</script>
-
-<script>
-    document.querySelector('.serviceDeleteBtn').addEventListener('click', function(e)=>{
-        e.preventDefault();
-        swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this imaginary file!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                swal("Poof! Your imaginary file has been deleted!", {
-                icon: "success",
-                });
-            }
-        });
-    });
-</script>
 @endsection
-
-
-<!--href="/cancelarViaje/{{$v->id}}"!--> 
