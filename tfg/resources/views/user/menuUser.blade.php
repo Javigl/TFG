@@ -10,7 +10,7 @@
     <header class="hero">
         <nav class="nav container">
             <div class="nav__logo">
-                <h2 class="nav__title"><b>Hola {{Auth::user()->name}}!</b></h2>
+                <h2 class="nav__title"><b>CarSite</b></h2>
             </div>
 
             <ul class="nav__link nav__link--menu">
@@ -50,7 +50,7 @@
         </nav>
         
         <section class="hero__container container">
-            <h1 class="hero__title">Bienvenid@ a tu perfil</h1>
+            <h1 class="hero__title">¡Hola {{Auth::user()->name}}!</h1>
             <p class="hero__subtitle">Tu saldo actual es: {{Auth::user()->balance}}€</p>
             <p class="hero__subtitle">CarPoints: {{Auth::user()->points}}</p>
             <a href="#" class="cta">Aqui irá un buscador</a>
