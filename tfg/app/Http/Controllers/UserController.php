@@ -82,20 +82,18 @@ class UserController extends Controller
         return redirect('/viajes')->with('success', 'Tu reserva se ha realizado correctamente, vuelve al menú para uniéndote a más viajes!');
     }
 
-    /*public function misViajes(){
+    public function misViajes(){
         $viajesSubidos = Travel::where('user_id','=',Auth::user()->id)->get();
         $viajes = TravelUser::where('user_id','=',Auth::user()->id)->get();
         $viajesContratados = [];
 
         foreach ($viajes as $v){
-            $viaje = Travel::find($v->id);
-            dd($viaje);
+            $viaje = Travel::find($v->travel_id);
             array_push($viajesContratados, $viaje);
         }
-        dd($viajesContratados);
 
         return view('user.misViajes', ['viajesSubidos' => $viajesSubidos, 'viajesContratados' => $viajesContratados]);
-    }*/
+    }
     
     public function formAddSaldo(){
         return view('user.addSaldo');

@@ -1,9 +1,7 @@
 @extends('user.menuUser')
 @section('content')
 <section class="travels container">
-    <h2 class="subtitle">TUS VIAJES</h2>
-    <br/>
-    <br/>
+    <h2 class="subtitle">VIAJES PUBLICADOS</h2>
     <div class="price__table">
         @foreach($viajesSubidos as $v)
             <div class="price__element">
@@ -18,6 +16,9 @@
             </div>
         @endforeach
     </div>
+    <br/>
+    <br/>
+    <h2 class="subtitle">VIAJES CONTRATADOS</h2>
     <div class="price__table">
         @foreach($viajesContratados as $v)
             <div class="price__element">

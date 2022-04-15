@@ -26,12 +26,14 @@
                     <p class="price__features">Anfitrión: {{ $v->user->name }}</p>
                 </div>
 
-                @if(!is_null($travelUser))
-                    <a href="/cancelarViaje/{{$v->id}}" class="price__cta desunirme">Desunirme</a>
-                @elseif($v->places > 0)
-                    <a href="/reservarViaje/{{$v->id}}" class="price__cta free">Unirme</a>
-                @else
-                    <a href="" class="price__cta full">Completo</a>
+                @if(Auth::user()->id != $v->user_id)
+                    @if(!is_null($travelUser))
+                        <a href="/cancelarViaje/{{$v->id}}" class="price__cta desunirme">Desunirme</a>
+                    @elseif($v->places > 0)
+                        <a href="/reservarViaje/{{$v->id}}" class="price__cta free">Unirme</a>
+                    @else
+                        <a href="" class="price__cta full">Completo</a>
+                    @endif
                 @endif
             </div>
         @endforeach
