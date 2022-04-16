@@ -15,8 +15,10 @@ class UserController extends Controller
         return view('user.menuUser');
     }
 
-    public function perfil(){
-        
+    public function perfil($id){
+        $user = User::find($id);
+
+        return view('user.perfil', ['user' => $user]);
     }
 
     public function viajes(){

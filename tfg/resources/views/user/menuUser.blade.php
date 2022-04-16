@@ -53,7 +53,7 @@
             <h1 class="hero__title">¡Hola {{Auth::user()->name}}!</h1>
             <p class="hero__subtitle">Tu saldo actual es: {{Auth::user()->balance}}€</p>
             <p class="hero__subtitle">CarPoints: {{Auth::user()->points}}</p>
-            <a href="/perfil" class="cta">Mi perfil</a>
+            <a href="/perfil/{{Auth::user()->id}}" class="cta">Mi perfil</a>
         </section>
     </header>
 

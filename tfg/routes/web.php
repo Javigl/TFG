@@ -20,7 +20,7 @@ Route::get('/inicio', function () {
 });
 
 Route::middleware('user')->group(function(){
-    Route::get('/perfil',[App\Http\Controllers\UserController::class, 'perfil']);
+    Route::get('/perfil/{id}',[App\Http\Controllers\UserController::class, 'perfil']);
     Route::get('/user',[App\Http\Controllers\UserController::class, 'viajes']);
     Route::get('/viajes',[App\Http\Controllers\UserController::class, 'viajes']);
     Route::get('/nuevoViaje',[App\Http\Controllers\UserController::class, 'formNuevoViaje']);
