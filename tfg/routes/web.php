@@ -20,18 +20,24 @@ Route::get('/inicio', function () {
 });
 
 Route::middleware('user')->group(function(){
+    Route::get('/perfil',[App\Http\Controllers\UserController::class, 'perfil']);
     Route::get('/user',[App\Http\Controllers\UserController::class, 'viajes']);
     Route::get('/viajes',[App\Http\Controllers\UserController::class, 'viajes']);
+    Route::get('/nuevoViaje',[App\Http\Controllers\UserController::class, 'formNuevoViaje']);
+    Route::post('/nuevoViaje',[App\Http\Controllers\UserController::class, 'nuevoViaje']);
     Route::get('/reservarViaje/{id}', [App\Http\Controllers\UserController::class, 'confirmarReservaViaje']);
     Route::post('/reservarViaje/{id}', [App\Http\Controllers\UserController::class, 'reservarViaje']);
     Route::get('/cancelarViaje/{id}', [App\Http\Controllers\UserController::class, 'confirmarCancelacionViaje']);
     Route::post('/cancelarViaje/{id}', [App\Http\Controllers\UserController::class, 'cancelarViaje']);
+    Route::get('/eliminarViaje/{id}', [App\Http\Controllers\UserController::class, 'confirmarEliminacionViaje']);
+    Route::post('/eliminarViaje/{id}', [App\Http\Controllers\UserController::class, 'eliminarViaje']);
     Route::get('/alquileres',[App\Http\Controllers\UserController::class, 'alquileres']);
     Route::get('/misalquileres',[App\Http\Controllers\UserController::class, 'misalquileres']);
     Route::get('/misviajes',[App\Http\Controllers\UserController::class, 'misviajes']);
     Route::get('/valoraciones',[App\Http\Controllers\UserController::class, 'valoraciones']);
     Route::get('/saldo',[App\Http\Controllers\UserController::class, 'formAddSaldo']);
     Route::post('/saldo',[App\Http\Controllers\UserController::class, 'addSaldo']);
+
 });
 
 Route::middleware('admin')->group(function(){

@@ -5,12 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Travel;
 use App\Models\TravelUser;
+use App\Models\Car;
+use App\Models\User;
 use Auth;
 
 class UserController extends Controller
 {
     public function menu(){
         return view('user.menuUser');
+    }
+
+    public function perfil(){
+        
     }
 
     public function viajes(){
@@ -45,6 +51,29 @@ class UserController extends Controller
         $viaje->save();
 
         return redirect('/viajes')->with('success', 'Cancelación realizada con éxito');
+    }
+
+    public function confirmarEliminacionViaje($id){
+        $viaje = Travel::find($id);
+
+        return view('user.confirmarEliminacionViaje', ['viaje' => $viaje]); 
+    }
+
+    public function eliminarViaje($id){
+        $viaje = Travel::find($id);
+        $passengers = TravelUser::where('travel_id','=', $viaje->id)->get();
+
+        foreach($passengers as $passenger){
+            $user = User::find($passenger->user_id);
+
+            $user->balance += $viaje->price;
+            $user->save();
+            $passenger->delete();
+        }
+
+        $viaje->delete();
+
+        return redirect('/misviajes')->with('success', 'Eliminación realizada con éxito');
     }
 
     public function reservarViaje($id,Request $req){
@@ -93,6 +122,39 @@ class UserController extends Controller
         }
 
         return view('user.misViajes', ['viajesSubidos' => $viajesSubidos, 'viajesContratados' => $viajesContratados]);
+    }
+
+    public function formNuevoViaje(){
+        $car = Car::where('user_id', '=', Auth::user()->id);
+
+        if(is_null($car)){
+            //mostrar otro formulario para añadir un coche
+        }
+        return view('user.formNuevoViaje');
+    }
+
+    public function nuevoViaje(Request $req){
+        $fechaActual = date('Y-m-d');
+        ///validar que el origen no es igual que el destino
+        //validar la fecha
+
+        if($req->fecha < $fechaActual){
+            return redirect()->back()->with('error', 'La fecha del viaje debe ser posterior a la actual');
+        }
+        if($req->origen == $req->destination){
+            return redirect()->back()->with('error', 'El origen y el destino deben ser distintos');
+        }
+
+        $travel = new Travel;
+        $travel->origin = $req->origen;
+        $travel->destination = $req->destination;
+        $travel->date = $req->fecha;
+        $travel->hour = $req->hora;
+        $travel->places = $req->numAsientos;
+        $travel->price = $req->precio;
+        $travel->user_id = Auth::user()->id;
+        $travel->save();
+        return redirect('/misviajes')->with('success', 'Viaje compartido correctamente!');
     }
     
     public function formAddSaldo(){
