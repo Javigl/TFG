@@ -51,12 +51,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $data['age'] = \Carbon\Carbon::parse($data['fecha'])->age;
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:25'],
             'email' => ['required', 'string', 'email', 'max:25', 'unique:users'],
             'password' => ['required', 'string', 'confirmed'],
             'lastname' => ['required', 'string', 'max:25'],
-            'dni' => ['required', 'unique:users', 'regex:/^[0-9]{8}[T|R|W|A|G|M|T|F|P|D|X|B|N|J|Z|S|Q|V|H|L|C|K|E]$/'],
+            //'dni' => ['required', 'unique:users', 'regex:/^[0-9]{8}[T|R|W|A|G|M|T|F|P|D|X|B|N|J|Z|S|Q|V|H|L|C|K|E]$/'],
+            'age' => ['required', 'numeric', 'min:18'],
             'telephone' => ['required', 'integer', 'regex:/^[0-9]{9}$/'],
         ]);
     }
@@ -68,13 +71,13 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {
+    {  
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'lastname' => $data['lastname'],
-            'dni' => $data['dni'],
+            'birthday' => $data['fecha'],
             'telephone' => $data['telephone'],
             'points' => 0,
             'admin' => false,

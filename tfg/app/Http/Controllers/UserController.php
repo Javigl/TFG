@@ -17,8 +17,10 @@ class UserController extends Controller
 
     public function perfil($id){
         $user = User::find($id);
+        $numViajesSubidos = sizeof(Travel::where('user_id', '=', $user->id)->get());
+        $numViajesContratados = sizeof(TravelUser::where('user_id', '=', $user->id)->get());
 
-        return view('user.perfil', ['user' => $user]);
+        return view('user.perfil', ['user' => $user, 'numViajesContratados' => $numViajesContratados, 'numViajesSubidos' => $numViajesSubidos]);
     }
 
     public function viajes(){

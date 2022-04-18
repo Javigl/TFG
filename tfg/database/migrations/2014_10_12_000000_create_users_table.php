@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('lastname');
-            $table->string('dni')->unique();
+            $table->date('birthday');
             $table->integer('telephone');
             $table->integer('points')->nullable();
             $table->boolean('admin');
