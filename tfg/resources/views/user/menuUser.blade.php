@@ -27,9 +27,6 @@
                     <a href="/misviajes" class="nav__links">Mis viajes</a>
                 </li>
                 <li class="nav__items">
-                    <a href="/valoraciones" class="nav__links">Valoraciones</a>
-                </li>
-                <li class="nav__items">
                     <a href="/saldo" class="nav__links">Añadir saldo</a>
                 </li>
                 <li class="nav__items">

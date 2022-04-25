@@ -34,6 +34,8 @@
                     @else
                         <a href="" class="price__cta full">Completo</a>
                     @endif
+                    <br/>
+                    <a href="/perfil/{{$v->id}}" class="price__cta perfilUser">Ver perfil del anfitrión</a>
                 @endif
             </div>
         @endforeach

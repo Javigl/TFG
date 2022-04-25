@@ -21,6 +21,9 @@
             </div>
         </div>
         <div class="perfil-usuario-body">
+            <?php
+                $edad = \Carbon\Carbon::parse($user->birthday)->age;
+            ?>
             <div class="perfil-usuario-bio">
                 <h3 class="titulo">{{$user->name}} {{$user->lastname}}</h3>
                 <p class="text-muted">Usuario de CarSite</p>
@@ -32,13 +35,19 @@
                     <li><i class="icono fas fa-rv"></i> Viajes compartidos: {{$numViajesSubidos}}</li>
                 </ul>
                 <ul class="lista-datos">
-                    <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento: {{$user->birthday}}</li>
-                    <li><i class="icono fas fa-user-check"></i> Registro: {{$user->created_at}}</li>
+                    <li><i class="icono fas fa-calendar-alt"></i> Edad: {{$edad}}</li>
+                    <li><i class="icono fas fa-user-check"></i>Registro: {{$user->created_at}}</li>
                     <li><i class="icono fas fa-code"></i> Viajes contratados: {{$numViajesContratados}}</li>
                 </ul>
                 <div class="center">
-                    <a href="/misviajes" style="margin: 1.25rem;margin-left: 220px;" role="button" class="btn btn-dark">Mis viajes</a>
-                    <a href="#" style="margin: 1.25rem" role="button" class="btn btn-dark">Mis alquileres</a>
+                    @if(Auth::user()->id == $user->id)
+                        <a href="/misviajes" style="margin: 1.25rem;margin-left: 130px;" role="button" class="btn btn-dark">Mis viajes</a>
+                        <a href="#" style="margin: 1.25rem" role="button" class="btn btn-dark">Mis alquileres</a>
+                        <a href="#" style="margin: 1.25rem" role="button" class="btn btn-dark">Valoraciones recibidas</a>
+                    @else
+                        <a href="/valorar/{{$user->id}}" style="margin: 1.25rem;margin-left: 190px;" role="button" class="btn btn-dark">Dejar valoración</a>
+                        <a href="#" style="margin: 1.25rem" role="button" class="btn btn-dark">Ver valoraciones</a>
+                    @endif
                 </div>
             </div>
         </div>

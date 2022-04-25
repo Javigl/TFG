@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Registrar Saldo</title>
+    <title>Valorar usuario</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -30,8 +30,8 @@
             </div>
             <div class="col-xl-7 col-lg-12 d-flex">
                 <div class="container align-self-center p-6">
-                    <h1 class="mb-3"><b>Añadir saldo</b></h1>
-                    <p style="text-align: left">Introduce el importe que deseas añadir a tu saldo actual (Saldo actual: {{Auth::user()->balance}}€)</p>
+                    <h1 class="mb-3"><b>Añadir valoración</b></h1>
+                    <p style="text-align: left">Introduce la valoración que deseas darle a {{$user->name}}</p>
                     <form method="POST" action="/saldo">
                         @csrf
                         <div class="row mb-2">
@@ -48,7 +48,7 @@
                             <br/>
                             <br/>
                         @endif
-                        <button type="submit" class="btn btn-primary width-100">Añadir saldo</button>
+                        <button type="submit" class="btn btn-primary width-100">Enviar valoración</button>
                         <a href="/viajes" role="button" class="btn btn-danger width-100">Volver</a>
                     </form>
                     <small class="d-inline-block text-muted mt-5">Derechos reservados &copy; Javier García Lillo</small>

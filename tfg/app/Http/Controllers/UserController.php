@@ -171,4 +171,9 @@ class UserController extends Controller
 
         return redirect('/viajes')->with('success', 'Saldo añadido correctamente, sigue disfrutando de nuestros servicios!');
     }
+
+    public function valorar($id){
+        $user = User::find($id);
+        return view('user.valorar', ['user' => $user]);
+    }
 }

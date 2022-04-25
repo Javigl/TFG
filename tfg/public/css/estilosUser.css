@@ -198,6 +198,14 @@ body{
     background-color: #ec3737dc;
 }
 
+.perfilUser{
+    background-color: rgba(115, 52, 199, 0.582);
+}
+
+.perfilUser:hover{
+    background-color:  rgba(136, 90, 196, 0.582);
+}
+
 .free:hover{
     background-color: #0953dd8c;
 }
