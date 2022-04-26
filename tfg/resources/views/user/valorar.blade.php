@@ -22,6 +22,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/register.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/estrellas.css') }}" rel="stylesheet">
 </head>
 <body>
     <section>
@@ -32,12 +33,17 @@
                 <div class="container align-self-center p-6">
                     <h1 class="mb-3"><b>Añadir valoración</b></h1>
                     <p style="text-align: left">Introduce la valoración que deseas darle a {{$user->name}}</p>
-                    <form method="POST" action="/saldo">
+                    <form method="POST" action="/valorar/{{$user->id}}">
                         @csrf
                         <div class="row mb-2">
                             <div class="form-group col-md-6">
-                                <label for="saldo"><b>Saldo(€)</b></label>
-                                <input type="number" class="form-control" id="saldo" name="saldo" step="0.01" placeholder="Introduce la cantidad a añadir" min="0" autofocus>
+                                <label for="opinion"><b>Opinión</b></label>
+                                <input type="text" class="form-control" id="opinion" name="opinion" placeholder="Introduce tu opinión sobre el usuario" maxlength="100" required autofocus>
+                                @error('opinion')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <br>
@@ -48,8 +54,28 @@
                             <br/>
                             <br/>
                         @endif
+                        <div class="row mb-2">
+                            <div class="form-group col-md-6">
+                                <label><b>Puntuación</b></label>
+                                <br/>
+                                <div class="stars">
+                                    <input type="radio" id="cinco" name="rate" value="5">
+                                    <label for="cinco"></label>
+                                    <input type="radio" id="cuatro" name="rate" value="4">
+                                    <label for="cuatro"></label>
+                                    <input type="radio" id="tres" name="rate" value="3">
+                                    <label for="tres"></label>
+                                    <input type="radio" id="dos" name="rate" value="2">
+                                    <label for="dos"></label>
+                                    <input type="radio" id="uno" name="rate" value="1" autofocus>
+                                    <label for="uno"></label>
+                                    <span class="result"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
                         <button type="submit" class="btn btn-primary width-100">Enviar valoración</button>
-                        <a href="/viajes" role="button" class="btn btn-danger width-100">Volver</a>
+                        <a href="/perfil/{{$user->id}}" role="button" class="btn btn-danger width-100">Volver</a>
                     </form>
                     <small class="d-inline-block text-muted mt-5">Derechos reservados &copy; Javier García Lillo</small>
                 </div>

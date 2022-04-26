@@ -7,6 +7,7 @@ use App\Models\Travel;
 use App\Models\TravelUser;
 use App\Models\Car;
 use App\Models\User;
+use App\Models\Rating;
 use Auth;
 
 class UserController extends Controller
@@ -172,8 +173,29 @@ class UserController extends Controller
         return redirect('/viajes')->with('success', 'Saldo añadido correctamente, sigue disfrutando de nuestros servicios!');
     }
 
-    public function valorar($id){
+    public function formValorar($id){
         $user = User::find($id);
         return view('user.valorar', ['user' => $user]);
+    }
+
+    public function guardarValoracion(Request $req, $id){
+        //user_2: es el valorado 
+        $valoracion = new Rating;
+        $valoracion->opinion = $req->opinion;
+        $valoracion->mark = $req->rate;
+        $valoracion->user1_id = Auth::user()->id;
+        $valoracion->user2_id = $id;
+        $valoracion->save();
+
+        return redirect()->action(
+            [UserController::class, 'perfil'], ['id' => $id]
+        )->with('success', 'Tu valoración ha sido registrada');;
+    }
+
+    public function listarValoraciones($id){
+        $valoracionesDadas = Rating::where('user1_id','=',Auth::user()->id)->get();
+        $valoracionesRecibidas = Rating::where('user2_id','=',Auth::user()->id)->get();
+
+        return view ('user.valoraciones', ['valoracionesDadas' => $valoracionesDadas, 'valoracionesRecibidas' => $valoracionesRecibidas]);
     }
 }

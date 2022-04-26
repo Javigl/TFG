@@ -34,7 +34,9 @@ Route::middleware('user')->group(function(){
     Route::get('/alquileres',[App\Http\Controllers\UserController::class, 'alquileres']);
     Route::get('/misalquileres',[App\Http\Controllers\UserController::class, 'misalquileres']);
     Route::get('/misviajes',[App\Http\Controllers\UserController::class, 'misviajes']);
-    Route::get('/valorar/{id}',[App\Http\Controllers\UserController::class, 'valorar']);
+    Route::get('/valorar/{id}',[App\Http\Controllers\UserController::class, 'formValorar']);
+    Route::post('/valorar/{id}',[App\Http\Controllers\UserController::class, 'guardarValoracion']);
+    Route::get('/valoraciones/{id}',[App\Http\Controllers\UserController::class, 'listarValoraciones']);
     Route::get('/saldo',[App\Http\Controllers\UserController::class, 'formAddSaldo']);
     Route::post('/saldo',[App\Http\Controllers\UserController::class, 'addSaldo']);
 

@@ -39,14 +39,19 @@
                     <li><i class="icono fas fa-user-check"></i>Registro: {{$user->created_at}}</li>
                     <li><i class="icono fas fa-code"></i> Viajes contratados: {{$numViajesContratados}}</li>
                 </ul>
+                @if (\Session::has('success'))
+                    <p style="color:#06c730b6; font-size: 20px; margin-left:200px"><strong>{!! \Session::get('success') !!}</strong></p>
+                    <br/>
+                    <br/>
+                @endif
                 <div class="center">
                     @if(Auth::user()->id == $user->id)
                         <a href="/misviajes" style="margin: 1.25rem;margin-left: 130px;" role="button" class="btn btn-dark">Mis viajes</a>
                         <a href="#" style="margin: 1.25rem" role="button" class="btn btn-dark">Mis alquileres</a>
-                        <a href="#" style="margin: 1.25rem" role="button" class="btn btn-dark">Valoraciones recibidas</a>
+                        <a href="/valoraciones/{{Auth::user()->id}}" style="margin: 1.25rem" role="button" class="btn btn-dark">Mis valoraciones</a>
                     @else
                         <a href="/valorar/{{$user->id}}" style="margin: 1.25rem;margin-left: 190px;" role="button" class="btn btn-dark">Dejar valoración</a>
-                        <a href="#" style="margin: 1.25rem" role="button" class="btn btn-dark">Ver valoraciones</a>
+                        <a href="/valoraciones/{{$user->id}}" style="margin: 1.25rem" role="button" class="btn btn-dark">Opiniones del anfitrión</a>
                     @endif
                 </div>
             </div>

@@ -1,0 +1,73 @@
+.stars{
+    height: 100px;
+    width: 240px;
+
+}
+
+.stars label{
+    float: right;
+    color: darkgrey;
+    margin: 0 5px;
+    margin-bottom: 0px;
+}
+
+.stars label:before{
+    content: '★';
+    font-size: 40px;
+}
+
+.stars input{
+    display: none;
+}
+
+.stars input:checked ~ label{
+    color: gold;
+    text-shadow: 1px 1px #c60;
+}
+
+.stars input:checked > label:hover,
+.stars input:checked > label:hover ~ label{
+    color: gold;
+    text-shadow: 1px 1px goldenrod;
+}
+
+.stars .result:before{
+    position: absolute;
+    content: '';
+    left: 55%;
+    transform: translate(-50%);
+    bottom: 290px;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    color: gold;
+    display: none;
+}
+
+.stars input:checked ~ .result:before{
+    margin-bottom: 20px;
+    display: block;
+}
+
+.stars #uno:checked ~ .result:before{
+    content: "Nada encantado 😠"
+}
+
+.stars #dos:checked ~ .result:before{
+    content: "Poco encantado 😒"
+}
+
+.stars #tres:checked ~ .result:before{
+    content: "Normal"
+}
+
+.stars #cuatro:checked ~ .result:before{
+    content: "Encantado 😄"
+}
+
+.stars #cinco:checked ~ .result:before{
+    content: "Muy encantado 😎"
+}
+
+
+
