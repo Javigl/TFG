@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
     public function viajes(){
-        $travels = Travel::all();
+        $travels = Travel::orderBy('date')->get();
         
         return view('user.viajes', ['viajes' => $travels]);
     }
@@ -193,9 +193,24 @@ class UserController extends Controller
     }
 
     public function listarValoraciones($id){
-        $valoracionesDadas = Rating::where('user1_id','=',Auth::user()->id)->get();
-        $valoracionesRecibidas = Rating::where('user2_id','=',Auth::user()->id)->get();
+        $valoracionesDadas = Rating::where('user1_id','=', $id)->get();
+        $valoracionesRecibidas = Rating::where('user2_id','=', $id)->get();
 
-        return view ('user.valoraciones', ['valoracionesDadas' => $valoracionesDadas, 'valoracionesRecibidas' => $valoracionesRecibidas]);
+        return view ('user.valoraciones', ['id' => $id, 'valoracionesDadas' => $valoracionesDadas, 'valoracionesRecibidas' => $valoracionesRecibidas]);
+    }
+
+    public function confirmarEliminacionValoracion($id){
+        $valoracion = Rating::find($id);
+
+        return view('user.confirmarEliminacionValoracion', ['valoracion' => $valoracion]); 
+    }
+
+    public function eliminarValoracion($id){
+        $rating = Rating::find($id);
+        $rating->delete();
+
+        return redirect()->action(
+            [UserController::class, 'perfil'], ['id' => Auth::user()->id]
+        )->with('delete', 'Tu valoración ha sido eliminada');
     }
 }

@@ -44,6 +44,11 @@
                     <br/>
                     <br/>
                 @endif
+                @if (\Session::has('delete'))
+                    <p style="color:#ee0c0cb6; font-size: 20px; margin-left:200px"><strong>{!! \Session::get('delete') !!}</strong></p>
+                    <br/>
+                    <br/>
+                @endif
                 <div class="center">
                     @if(Auth::user()->id == $user->id)
                         <a href="/misviajes" style="margin: 1.25rem;margin-left: 130px;" role="button" class="btn btn-dark">Mis viajes</a>

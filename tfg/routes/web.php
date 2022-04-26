@@ -37,6 +37,8 @@ Route::middleware('user')->group(function(){
     Route::get('/valorar/{id}',[App\Http\Controllers\UserController::class, 'formValorar']);
     Route::post('/valorar/{id}',[App\Http\Controllers\UserController::class, 'guardarValoracion']);
     Route::get('/valoraciones/{id}',[App\Http\Controllers\UserController::class, 'listarValoraciones']);
+    Route::get('/eliminarValoracion/{id}', [App\Http\Controllers\UserController::class, 'confirmarEliminacionValoracion']);
+    Route::post('/eliminarValoracion/{id}', [App\Http\Controllers\UserController::class, 'eliminarValoracion']);
     Route::get('/saldo',[App\Http\Controllers\UserController::class, 'formAddSaldo']);
     Route::post('/saldo',[App\Http\Controllers\UserController::class, 'addSaldo']);
 
