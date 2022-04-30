@@ -24,8 +24,23 @@ class UserController extends Controller
         return view('user.perfil', ['user' => $user, 'numViajesContratados' => $numViajesContratados, 'numViajesSubidos' => $numViajesSubidos]);
     }
 
-    public function viajes(){
-        $travels = Travel::orderBy('date')->get();
+    public function viajes(Request $req){
+        $origen = $req->get('origen');
+        $destino = $req->get('destino');
+
+        //no tiene en cuenta ni mayus ni tildes
+        if(!is_null($origen) && !is_null($destino)){
+            $travels = Travel::where('origin', '=', $origen)->where('destination', '=', $destino)->orderBy('date')->get();
+        }
+        else if(!is_null($req->get('origen'))){
+            $travels = Travel::where('origin', '=', $origen)->orderBy('date')->get();
+        }
+        else if(!is_null($req->get('destino'))){
+            $travels = Travel::where('destination', '=', $destino)->orderBy('date')->get();
+        }
+        else{
+            $travels = Travel::orderBy('date')->get();
+        }
         
         return view('user.viajes', ['viajes' => $travels]);
     }
@@ -113,7 +128,7 @@ class UserController extends Controller
         $travel_user->user_id = $user->id;
         $travel_user->travel_id = $viaje->id;
         $travel_user->save();
-        return redirect('/viajes')->with('success', 'Tu reserva se ha realizado correctamente, vuelve al menú para uniéndote a más viajes!');
+        return redirect('/viajes')->with('success', 'Tu reserva se ha realizado correctamente, vuelve al menú para seguir uniéndote a más viajes!');
     }
 
     public function misViajes(){

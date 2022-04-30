@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/estilosUser.css') }}">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 </head>
 <body>
     <header class="hero">
