@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/administrarViajes">
                         <span class="icon"><ion-icon name="paper-plane-outline"></ion-icon></span>
                         <span class="title">Viajes</span>
                     </a>
@@ -98,61 +98,7 @@
                 </div>
             </div>
 
-            <div class="search">
-                <form method="GET">
-                    <input type="text" placeholder="Buscar usuario">
-                    <div class="btnSearch">
-                        <button type="submit" class="btnsend"><ion-icon name="search-outline"></ion-icon></button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="details">
-                <div class="recentOrders">
-                    <div class="cardHeader">
-                        <h2>Usuarios</h2>
-                        <a href="#" class="btn">View All</a>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>id</td>
-                                <td>Nombre</td>
-                                <td>Apellidos</td>
-                                <td>Email</td>
-                                <td>Status</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($users as $u)
-                                <tr>
-                                    <td>{{ $u->id }}</td>
-                                    <td>{{ $u->name }}</td>
-                                    <td>{{ $u->lastname }}</td>
-                                    <td>{{ $u->email }}</td>
-                                    @if($u->blocked)
-                                        <td><span class="status pending">delivered</span></td>
-                                    @else
-                                        <td><span class="status delivered">delivered</span></td>
-                                    @endif
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="recentCustomers">
-                    <div class="cardHeader">
-                        <h2>Recent Customers</h2>
-                    </div>
-                    <table>
-                        <tr>
-                            <td width="60px"><div class="imgBx"><img src="{{ asset('images/perfil.png') }}"></div></td>
-                            <td><h4>David<br><span>Italy</span></h4></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            @yield('content')
         </div>
     </div>
 
