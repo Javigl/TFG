@@ -49,5 +49,8 @@ Route::middleware('admin')->group(function(){
     Route::get('/bloquearUsuario/{id}', [App\Http\Controllers\AdminController::class, 'bloquearUsuario']);
     Route::get('/habilitarUsuario/{id}', [App\Http\Controllers\AdminController::class, 'habilitarUsuario']);
     Route::get('/administrarViajes', [App\Http\Controllers\AdminController::class, 'viajes']);
+    Route::get('/eliminarViajeAdmin/{id}', [App\Http\Controllers\AdminController::class, 'eliminarViaje']);
+    Route::get('/administrarValoraciones', [App\Http\Controllers\AdminController::class, 'valoraciones']);
+    Route::get('/eliminarValoracionAdmin/{id}', [App\Http\Controllers\AdminController::class, 'eliminarValoracion']);
 });
 

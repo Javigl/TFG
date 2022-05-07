@@ -175,6 +175,14 @@ body{
     font-size: 16px;
 }
 
+.search.viajes input::placeholder{
+    font-size: 14px;
+}
+
+.search.valoraciones input::placeholder{
+    font-size: 12px;
+}
+
 .search input{
     width: -10px;
     height: 40px;
@@ -261,16 +269,6 @@ body{
 .cardBox .card .iconBx{
     font-size: 3.5em;
     color: var(--black2);
-}
-
-.cardBox .card:hover{
-    background: var(--blue);
-}
-
-.cardBox .card:hover .numbers,
-.cardBox .card:hover .cardName,
-.cardBox .card:hover .iconBx{
-    color: var(--white);
 }
 
 .details{

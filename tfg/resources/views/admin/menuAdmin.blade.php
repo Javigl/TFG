@@ -15,7 +15,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/admin">
                         <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
                         <span class="title">Usuarios</span>
                     </a>
@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/administrarValoraciones">
                         <span class="icon"><ion-icon name="chatbox-ellipses-outline"></ion-icon></span>
                         <span class="title">Opiniones</span>
                     </a>
