@@ -39,7 +39,7 @@ class UserController extends Controller
             $travels = Travel::where('destination', '=', $destino)->orderBy('date')->get();
         }
         else{
-            $travels = Travel::orderBy('date')->get();
+            $travels = Travel::orderBy('date')->simplePaginate(6);
         }
         
         return view('user.viajes', ['viajes' => $travels]);
@@ -155,8 +155,6 @@ class UserController extends Controller
 
     public function nuevoViaje(Request $req){
         $fechaActual = date('Y-m-d');
-        ///validar que el origen no es igual que el destino
-        //validar la fecha
 
         if($req->fecha < $fechaActual){
             return redirect()->back()->with('error', 'La fecha del viaje debe ser posterior a la actual');
@@ -227,5 +225,9 @@ class UserController extends Controller
         return redirect()->action(
             [UserController::class, 'perfil'], ['id' => Auth::user()->id]
         )->with('delete', 'Tu valoración ha sido eliminada');
+    }
+
+    public function formNuevoAlquiler(){
+        return view('user.formNuevoAlquiler');
     }
 }

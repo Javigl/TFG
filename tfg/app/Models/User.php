@@ -72,6 +72,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Travel');
     }
 
+    public function rentals(){
+        return $this->hasMany('App\Models\Rental');
+    }
+
     /**
      * Send the password reset notification.
      *

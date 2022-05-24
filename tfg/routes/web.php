@@ -32,6 +32,8 @@ Route::middleware('user')->group(function(){
     Route::get('/eliminarViaje/{id}', [App\Http\Controllers\UserController::class, 'confirmarEliminacionViaje']);
     Route::post('/eliminarViaje/{id}', [App\Http\Controllers\UserController::class, 'eliminarViaje']);
     Route::get('/alquileres',[App\Http\Controllers\UserController::class, 'alquileres']);
+    Route::get('/nuevoAlquiler',[App\Http\Controllers\UserController::class, 'formNuevoAlquiler']);
+    //Route::post('/nuevoAlquiler',[App\Http\Controllers\UserController::class, 'nuevoAlquiler']);
     Route::get('/misalquileres',[App\Http\Controllers\UserController::class, 'misalquileres']);
     Route::get('/misviajes',[App\Http\Controllers\UserController::class, 'misviajes']);
     Route::get('/valorar/{id}',[App\Http\Controllers\UserController::class, 'formValorar']);

@@ -9,10 +9,13 @@
         <form method="GET">
             <input type="text" id="origen" name="origen" placeholder="Origen">
             <input type="text" id="destino" name="destino" placeholder="Destino">
+            <br/>
+            <br/>
             <div class="btnSearch">
                 <button type="submit" class="btnsend"><i class="fa fa-search icon"></i></button>
             </div>
         </form>
+        <br/>
     </div>
     <br/>
     <br/>
@@ -23,9 +26,12 @@
         <br/>
         <br/>
     @endif
-    <div class="price__table">
+    <br/>
+    <br/>
+    <div>
         @if(sizeof($viajes) > 0) 
-            @foreach($viajes as $v)
+            <div class="price__table">
+                @foreach($viajes as $v)
                 <?php
                     $travelUser = App\Models\TravelUser::where('user_id', '=', Auth::user()->id)->where('travel_id','=', $v->id)->first();  
                 ?>
@@ -53,9 +59,15 @@
                         <a href="/perfil/{{Auth::user()->id}}" class="price__cta perfilUser">Mi perfil</a>
                     @endif
                 </div>
-            @endforeach
+                @endforeach
+            </div>
+            <br/>
+            <br/>
+            <div style="text-align: center; font-size: 20px">  
+                {!! $viajes->links() !!}
+            <div>
         @else
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success" style="text-align: center;" role="alert">
                 <strong style="font-size: 20px">No hay resultados para su búsqueda</strong>
             </div>
         @endif

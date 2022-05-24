@@ -97,6 +97,14 @@ body{
     margin-left: 200px;
 }
 
+.checkboxes{
+    margin-left: 120px;
+}
+
+.labelChecks {
+    padding-right: 20px;
+}
+ 
 .buscar input{
     width: -10px;
     height: 40px;
@@ -107,6 +115,8 @@ body{
     border: 1px solid silver;
     border-radius: 30px;
 }
+
+
 
 .btnSearch{
     position: absolute;
