@@ -37,9 +37,9 @@
                     <h3 class="price__price" style="font-size: 30px">{{ $a->price }}€/día</h3>
 
                     <div class="price__items">
-                        <img src="/images/cars/{{$car->image}}" alt="220px" width="220px" style="margin-left: 20px; padding: 10px">
+                        <img src="/images/cars/{{$car->image}}" alt="250px" width="250px" style="margin-left: 5px; padding: 10px; border-radius: 20px">
                         <br/>
-                        <p class="price__features" style="font-size: 30px"><b>{{ $car->brand }}</b></p>
+                        <p class="price__features" style="font-size: 20px"><b>{{ $car->brand }}</b></p>
                         <p class="price__features" style="font-size: 25px"><b>{{ $car->model }}</b></p>
                         <p class="price__features">Anfitrión: {{ $anfitrion->name }}</p>
                     </div>
@@ -47,7 +47,7 @@
                         <a href="" class="price__cta free">Alquilar vehículo</a>
                     @else
                         @if(Auth::user()->id != $rentUser->id)
-                            <a href="" class="price__cta full">Completo</a>                
+                            <a href="" class="price__cta full">Vehículo alquilado</a>                
                         @else
                             <a href="" class="price__cta desunirme">Cancelar alquiler</a> 
                         @endif

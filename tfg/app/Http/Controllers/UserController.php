@@ -254,9 +254,8 @@ class UserController extends Controller
         $car = new Car;
         $imagen = $req->file("image");
         $nombreImagen = Str::slug("car" . ($lastId + 1)). "." .$imagen->guessExtension();
-        $ruta = public_path("images/cars" . $nombreImagen);
-        //$imagen->move($ruta, $nombreImagen);
-        Image::make($imagen)->resize(200,200)->save($ruta);
+        $ruta = public_path("images/cars/" . $nombreImagen);
+        $imagen->move($ruta, $nombreImagen);
         $car->image = $nombreImagen;
         $car->brand = $req->brand;
         $car->model = $req->model;
