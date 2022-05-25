@@ -15,7 +15,7 @@ class TravelsTableSeeder extends Seeder
     public function run()
     {
         DB::table('travels')->delete();
-        DB::table('travels')->insert(['origin'=>'Alicante','destination'=>'Madrid','date'=>'2021-12-15', 'hour'=>'13:30:00','places'=>4,'price'=>30.0, 'user_id'=> 2]);
+        DB::table('travels')->insert(['origin'=>'Alicante','destination'=>'Madrid','date'=>'2021-12-15', 'hour'=>'13:30:00','places'=>4,'price'=>30.0, 'user_id'=> 10]);
         DB::table('travels')->insert(['origin'=>'Pamplona','destination'=>'Vitoria','date'=>'2021-12-15', 'hour'=>'13:00:00', 'places'=>5,'price'=>25.50, 'user_id'=> 1]);
         DB::table('travels')->insert(['origin'=>'Madrid','destination'=>'Salamanca','date'=>'2021-12-15', 'hour'=>'12:00:00', 'places'=>3,'price'=>40.30, 'user_id'=> 3]);
         DB::table('travels')->insert(['origin'=>'Sevilla','destination'=>'Almería','date'=>'2021-12-15', 'hour'=>'14:00:00', 'places'=>2,'price'=>20.0, 'user_id'=> 4]);

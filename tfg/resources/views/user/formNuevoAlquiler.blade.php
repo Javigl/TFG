@@ -133,7 +133,7 @@
                         </div>
                         <div class="row mb-2">
                             <div class="form-group col-md-6">
-                                <label for="numPlazas"><b>Número de plazas del vehículo</b></label>
+                                <label for="numPlazas"><b>Número de plazas del vehículo</b><span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" id="numPlazas" name="numPlazas" placeholder="Introduce el número de plazas del vehículo" min="1" autofocus required>
                                 @error('numPlazas')
                                     <span class="invalid-feedback" role="alert">
@@ -142,7 +142,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="precio"><b>Precio diario</b></label>
+                                <label for="precio"><b>Precio diario</b><span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" id="precio" name="precio" step="0.01" placeholder="Introduce el precio del alquiler" min="0" autofocus required>
                                 @error('precio')
                                     <span class="invalid-feedback" role="alert">

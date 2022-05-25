@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use App\Models\Travel;
 use App\Models\TravelUser;
 use App\Models\Car;
@@ -224,13 +225,17 @@ class UserController extends Controller
         )->with('delete', 'Tu valoración ha sido eliminada');
     }
 
+    public function alquileres(){
+        $alquileres = Rental::all();
+
+        return view('user.alquileres', ['alquileres' => $alquileres]);
+    }
+
     public function formNuevoAlquiler(){
         return view('user.formNuevoAlquiler');
     }
 
     public function nuevoAlquiler(Request $req){
-        //validar la matricula
-        //validar que la fecha recogida sea posterior a la actual y anterior a la de devolucion
         $fechaActual = date('Y-m-d');
 
         if($req->fechaR < $fechaActual){
@@ -249,8 +254,9 @@ class UserController extends Controller
         $car = new Car;
         $imagen = $req->file("image");
         $nombreImagen = Str::slug("car" . ($lastId + 1)). "." .$imagen->guessExtension();
-        $ruta = public_path("images/cars");
-        $imagen->move($ruta, $nombreImagen);
+        $ruta = public_path("images/cars" . $nombreImagen);
+        //$imagen->move($ruta, $nombreImagen);
+        Image::make($imagen)->resize(200,200)->save($ruta);
         $car->image = $nombreImagen;
         $car->brand = $req->brand;
         $car->model = $req->model;

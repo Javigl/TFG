@@ -18,7 +18,7 @@ class CarsTableSeeder extends Seeder
         DB::table('cars')->insert(['image'=>'car1.jpg', 'brand'=>'Audi','model'=>'Q3', 'licensePlate'=> '1010LVJ',
         'carType'=>'Todoterreno', 'fuelType'=>'Gasolina', 'transmission'=>'Manual', 'places'=>5, 'user_id'=>1]);
         DB::table('cars')->insert(['image'=>'car2.jpg', 'brand'=>'Nissan','model'=>'Juke', 'licensePlate'=> '5500JPM',
-        'carType'=>'Todoterreno', 'fuelType'=>'Híbrido', 'transmission'=>'Automático', 'places'=>5, 'user_id'=>2]);
+        'carType'=>'Todoterreno', 'fuelType'=>'Híbrido', 'transmission'=>'Automático', 'places'=>5, 'user_id'=>1]);
         DB::table('cars')->insert(['image'=>'car3.jpg','brand'=>'Opel','model'=>'GT', 'licensePlate'=> '8985DFT',
         'carType'=>'Descapotable', 'fuelType'=>'Diésel', 'transmission'=>'Manual', 'places'=>2, 'user_id'=>3]);
         DB::table('cars')->insert(['image'=>'car4.jpg', 'brand'=>'BMW','model'=>'Z4', 'licensePlate'=> '2548CRL',
