@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Travel;
 use App\Models\TravelUser;
 use App\Models\Car;
 use App\Models\User;
 use App\Models\Rating;
+use App\Models\Rental;
 use Auth;
 
 class UserController extends Controller
@@ -96,7 +98,7 @@ class UserController extends Controller
         return redirect('/misviajes')->with('success', 'Eliminación realizada con éxito');
     }
 
-    public function reservarViaje($id,Request $req){
+    public function reservarViaje($id, Request $req){
         $user = Auth::user();
         $viaje = Travel::find($id);
         $precioReserva = $viaje->price;
@@ -145,11 +147,6 @@ class UserController extends Controller
     }
 
     public function formNuevoViaje(){
-        $car = Car::where('user_id', '=', Auth::user()->id);
-
-        if(is_null($car)){
-            //mostrar otro formulario para añadir un coche
-        }
         return view('user.formNuevoViaje');
     }
 
@@ -229,5 +226,56 @@ class UserController extends Controller
 
     public function formNuevoAlquiler(){
         return view('user.formNuevoAlquiler');
+    }
+
+    public function nuevoAlquiler(Request $req){
+        //validar la matricula
+        //validar que la fecha recogida sea posterior a la actual y anterior a la de devolucion
+        $fechaActual = date('Y-m-d');
+
+        if($req->fechaR < $fechaActual){
+            return redirect()->back()->with('error', 'La fecha de recogida debe ser posterior a la actual');
+        }
+        if($req->fechaR > $req->fechaD){
+            return redirect()->back()->with('error', 'La fecha de recogida debe ser anterior a la de devolución');
+        }
+        if(!preg_match("/^[0-9]{4}[A-Z]{3}$/", $req->mat)){
+            return redirect()->back()->with('error', 'La matrícula debe seguir el siguiente formato: 1111AAA');
+        }
+
+        $lastCar = Car::latest('id')->first();
+        $lastId = $lastCar->id;
+
+        $car = new Car;
+        $imagen = $req->file("image");
+        $nombreImagen = Str::slug("car" . ($lastId + 1)). "." .$imagen->guessExtension();
+        $ruta = public_path("images/cars");
+        $imagen->move($ruta, $nombreImagen);
+        $car->image = $nombreImagen;
+        $car->brand = $req->brand;
+        $car->model = $req->model;
+        $car->licensePlate = $req->mat;
+        $car->carType = $req->typeCar;
+        $car->fuelType = $req->fuel;
+        $car->transmission = $req->transmision;
+        $car->places = $req->numPlazas;
+        $car->user_id = Auth::user()->id;
+        $car->save();
+        $lastCar = Car::latest('id')->first();
+
+        
+        $rental = new Rental;
+        $rental->city = $req->city;
+        $rental->pickUpDate = $req->fechaR;
+        $rental->returnDate = $req->fechaD;
+        $rental->price = $req->precio;
+        $rental->car_id = $lastCar->id;
+        $rental->save();
+        //el usuario lo rellenaremos cuando un usuario alquile el coche anunciado
+        return redirect('/misAlquileres')->with('success', 'Viaje compartido correctamente!');
+    }
+
+    public function misAlquileres(){
+
     }
 }
