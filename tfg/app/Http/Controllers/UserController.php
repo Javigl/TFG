@@ -226,9 +226,15 @@ class UserController extends Controller
     }
 
     public function alquileres(){
-        $alquileres = Rental::all();
+        $alquileres = Rental::simplePaginate(6);
 
         return view('user.alquileres', ['alquileres' => $alquileres]);
+    }
+
+    public function detallesAlquiler($id){
+        $alquiler = Rental::find($id);
+
+        return view('user.detallesAlquiler', ['alquiler' => $alquiler]);
     }
 
     public function formNuevoAlquiler(){
@@ -280,7 +286,82 @@ class UserController extends Controller
         return redirect('/misAlquileres')->with('success', 'Viaje compartido correctamente!');
     }
 
-    public function misAlquileres(){
+    public function confirmarReservaAlquiler($id){
+        $alquiler = Rental::find($id);
+        $coche = Car::find($alquiler->car_id);
+        $anfitrion = User::find($coche->user_id);
 
+        $returnDate = date_create($alquiler->returnDate);
+        $pickUpDate = date_create($alquiler->pickUpDate);
+        $diasAlquiler = date_diff($pickUpDate, $returnDate)->format('%R%a');
+
+        $precioAlquiler = $diasAlquiler * $alquiler->price;
+        return view('user.confirmarReservaAlquiler', ['alquiler' => $alquiler, 'coche' => $coche, 'anfitrion' => $anfitrion, 'precioAlquiler' => $precioAlquiler]); 
+    }
+
+    public function reservaAlquiler($id, Request $req){
+        $user = Auth::user();
+        $alquiler = Rental::find($id);
+        $returnDate = date_create($alquiler->returnDate);
+        $pickUpDate = date_create($alquiler->pickUpDate);
+        $diasAlquiler = date_diff($pickUpDate, $returnDate)->format('%R%a');
+
+        $precioAlquiler = $diasAlquiler * $alquiler->price;
+
+        if($req->carpoints != 0 && !is_null($req->carpoints)){
+            if($req->carpoints > $user->points){
+                return redirect()->back()->with('error', 'Carpoints insuficientes, introduce menos');
+            }
+            else{
+                $precioAlquiler -= ($req->carpoints * 0.5);
+                if($precioAlquiler < 2){
+                    return redirect()->back()->with('error', 'La reserva debe tener un importe mínimo de 2€, usa menos carpoints');
+                }
+            }
+        }
+
+        if($precioAlquiler > $user->balance){
+            return redirect()->back()->with('error', 'Saldo insuficiente, carga más saldo');
+        }
+
+        $user->balance -= $precioAlquiler;
+        $user->points -= $req->carpoints - 1; //recibe un carpoint por reserva
+        $user->save();
+
+        $alquiler->user_id = $user->id;
+        $alquiler->save();
+        return redirect('/alquileres')->with('success', '¡Tu reserva se ha realizado correctamente!');
+    }
+
+    public function confirmarCancelacionAlquiler($id){
+        $alquiler = Rental::find($id);
+        $coche = Car::find($alquiler->car_id);
+
+        return view('user.confirmarCancelacionAlquiler', ['alquiler' => $alquiler, 'coche' => $coche]); 
+    }
+
+    public function cancelarAlquiler($id){
+        $user = Auth::user();
+        $alquiler = Rental::find($id);
+        $returnDate = date_create($alquiler->returnDate);
+        $pickUpDate = date_create($alquiler->pickUpDate);
+        $diasAlquiler = date_diff($pickUpDate, $returnDate)->format('%R%a');
+        $precioAlquiler = $diasAlquiler * $alquiler->price;
+
+        $alquiler->user_id = null;
+        $alquiler->save();
+
+        $user->balance += $precioAlquiler;
+        $user->save();
+
+        return redirect('/alquileres')->with('success', '¡Tu reserva se ha sido cancelada!');
+    }
+
+    public function misAlquileres(){
+        $cochesUser = Car::select('id')->where('user_id', '=', 1)->get(); 
+        $alquileresSubidos = Rental::whereIn('car_id', $cochesUser)->get(); 
+        $alquileresContratados = Rental::where('user_id', Auth::user()->id)->get();
+
+        return view('user.misAlquileres', ['alquileresSubidos' => $alquileresSubidos, 'alquileresContratados' => $alquileresContratados]);
     }
 }

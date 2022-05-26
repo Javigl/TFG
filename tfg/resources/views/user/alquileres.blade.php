@@ -18,10 +18,8 @@
     <br/>
     @if (\Session::has('success'))
         <div class="alert alert-success" role="alert">
-            <strong style="font-size: 20px">{!! \Session::get('success') !!}</strong>
+            <strong style="font-size: 25px; margin-left: 345px">{!! \Session::get('success') !!}</strong>
         </div>
-        <br/>
-        <br/>
     @endif
     <div>
         @if(sizeof($alquileres) > 0) 
@@ -44,21 +42,24 @@
                         <p class="price__features">Anfitrión: {{ $anfitrion->name }}</p>
                     </div>
                     @if(is_null($rentUser))
-                        <a href="" class="price__cta free">Alquilar vehículo</a>
+                        <a href="/reservarAlquiler/{{$a->id}}" class="price__cta free">Alquilar vehículo</a>
                     @else
                         @if(Auth::user()->id != $rentUser->id)
-                            <a href="" class="price__cta full">Vehículo alquilado</a>                
+                            <a class="price__cta full">Vehículo alquilado</a>                
                         @else
-                            <a href="" class="price__cta desunirme">Cancelar alquiler</a> 
+                            <a href="/cancelarAlquiler/{{$a->id}}" class="price__cta desunirme">Cancelar alquiler</a> 
                         @endif
                     @endif
                     <br>
-                    <a href="" class="price__cta perfilUser">Más detalles</a>
+                    <a href="/detallesAlquiler/{{$a->id}}" class="price__cta perfilUser">Más detalles</a>
                 </div>
                 @endforeach
             </div>
             <br/>
             <br/>
+            <div style="text-align: center; font-size: 20px">  
+                {!! $alquileres->links() !!}
+            <div>
         @else
             <div class="alert alert-success" style="text-align: center;" role="alert">
                 <strong style="font-size: 20px">No hay resultados para su búsqueda</strong>

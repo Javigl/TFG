@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Cancelar viaje</title>
+    <title>Cancelar alquiler</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -30,16 +30,16 @@
             </div>
             <div class="col-xl-7 col-lg-12 d-flex">
                 <div class="container align-self-center p-6">
-                    <h1 class="mb-3"><b>Cancelar viaje</b></h1>
-                    <p class="text-muted mb-5">Estás a punto de cancelar tu viaje hacia {{$viaje->destination}} de la mano de {{$viaje->user->name}}</p>
-                    <p class="text-muted mb-5">Tenga en cuenta que le será reembolsado el importe por su lugar en el viaje, pero no sus carpoints en caso de que
+                    <h1 class="mb-3"><b>Cancelar alquiler</b></h1>
+                    <p class="text-muted mb-5">Estás a punto de cancelar tu alquiler de un {{$coche->brand}} {{$coche->model}}</p>
+                    <p class="text-muted mb-5">Tenga en cuenta que le será reembolsado el importe del alquiler, pero no sus carpoints en caso de que
                         usara.
                     </p>
                     <p style="text-align: left">¿Deseas confirmar la cancelación?</p>
-                    <form method="POST" action="/cancelarViaje/{{$viaje->id}}">
+                    <form method="POST" action="/cancelarAlquiler/{{$alquiler->id}}">
                         @csrf
                         <button type="submit" class="btn btn-primary width-100">Sí</button>
-                        <a href="/viajes" role="button" class="btn btn-danger width-100">No</a>
+                        <a href="/alquileres" role="button" class="btn btn-danger width-100">No</a>
                     </form>
                     <small class="d-inline-block text-muted mt-5">Derechos reservados &copy; Javier García Lillo</small>
                 </div>

@@ -51,7 +51,7 @@
                         @elseif($v->places > 0)
                             <a href="/reservarViaje/{{$v->id}}" class="price__cta free">Unirme</a>
                         @else
-                            <a href="" class="price__cta full">Completo</a>
+                            <a class="price__cta full">Completo</a>
                         @endif
                         <br/>
                         <a href="/perfil/{{$v->id}}" class="price__cta perfilUser">Ver perfil del anfitrión</a>

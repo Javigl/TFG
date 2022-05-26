@@ -28,16 +28,19 @@
         </div>
     @else
         <div class="alert alert-success" role="alert">
-            <strong style="font-size: 20px">No has publicado viajes todavía</strong>
+            <strong style="font-size: 20px; margin-left: 425px">No has publicado viajes todavía</strong>
         </div>
         <br/>
         <br/>
     @endif
-
+    <br/>
+    <br/>
+    <h2 class="subtitle">VIAJES CONTRATADOS</h2>
+    <br/>
+    <br/>
     @if(sizeof($viajesContratados) > 0)
         <br/>
         <br/>
-        <h2 class="subtitle">VIAJES CONTRATADOS</h2>
         <div class="price__table">
             @foreach($viajesContratados as $v)
                 <div class="price__element">
@@ -54,7 +57,7 @@
         </div>
     @else
         <div class="alert alert-success" role="alert">
-            <strong style="font-size: 20px">No has contratado viajes todavía</strong>
+            <strong style="font-size: 20px; margin-left: 425px">No has contratado viajes todavía</strong>
         </div>
         <br/>
         <br/>

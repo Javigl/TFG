@@ -57,7 +57,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="image"><b>Imagen</b><span class="text-danger">*</span></label>
-                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" accept=".png,.jpg,.jpeg" required>
+                            <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" accept=".jpg" required>
                             @error('image')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -180,7 +180,7 @@
                             <br/>
                         @endif
                         <button type="submit" class="btn btn-primary width-100">Crear alquiler</button>
-                        <a href="/misAlquileres" role="button" class="btn btn-danger width-100">Volver</a>
+                        <a href="/misalquileres" role="button" class="btn btn-danger width-100">Volver</a>
                     </form>
                     <small class="d-inline-block text-muted mt-5">Derechos reservados &copy; Javier García Lillo</small>
                 </div>
