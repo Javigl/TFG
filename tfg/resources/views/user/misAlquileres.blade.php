@@ -68,6 +68,7 @@
             @endforeach
         </div>
     @else
+        <br/>
         <div class="alert alert-success" role="alert">
             <strong style="font-size: 20px; margin-left: 425px">No has contratado viajes todavía</strong>
         </div>

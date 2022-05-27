@@ -23,8 +23,12 @@ class UserController extends Controller
         $user = User::find($id);
         $numViajesSubidos = sizeof(Travel::where('user_id', '=', $user->id)->get());
         $numViajesContratados = sizeof(TravelUser::where('user_id', '=', $user->id)->get());
+        $cochesUser = Car::select('id')->where('user_id', '=',  $user->id)->get(); 
+        $numAlquileresSubidos = sizeof(Rental::whereIn('car_id', $cochesUser)->get()); 
+        $numAlquileresContratados = sizeof(Rental::where('user_id', $user->id)->get());
 
-        return view('user.perfil', ['user' => $user, 'numViajesContratados' => $numViajesContratados, 'numViajesSubidos' => $numViajesSubidos]);
+        return view('user.perfil', ['user' => $user, 'numViajesContratados' => $numViajesContratados, 'numViajesSubidos' => $numViajesSubidos, 
+                    'numAlquileresSubidos' => $numAlquileresSubidos, 'numAlquileresContratados' => $numAlquileresContratados]);
     }
 
     public function viajes(Request $req){
@@ -231,6 +235,14 @@ class UserController extends Controller
         return view('user.alquileres', ['alquileres' => $alquileres]);
     }
 
+    public function misAlquileres(){
+        $cochesUser = Car::select('id')->where('user_id', '=', Auth::user()->id)->get(); 
+        $alquileresSubidos = Rental::whereIn('car_id', $cochesUser)->get(); 
+        $alquileresContratados = Rental::where('user_id', Auth::user()->id)->get();
+
+        return view('user.misAlquileres', ['alquileresSubidos' => $alquileresSubidos, 'alquileresContratados' => $alquileresContratados]);
+    }
+
     public function detallesAlquiler($id){
         $alquiler = Rental::find($id);
 
@@ -357,11 +369,24 @@ class UserController extends Controller
         return redirect('/alquileres')->with('success', '¡Tu reserva se ha sido cancelada!');
     }
 
-    public function misAlquileres(){
-        $cochesUser = Car::select('id')->where('user_id', '=', 1)->get(); 
-        $alquileresSubidos = Rental::whereIn('car_id', $cochesUser)->get(); 
-        $alquileresContratados = Rental::where('user_id', Auth::user()->id)->get();
+    public function confirmarEliminacionAlquiler($id){
+        $alquiler = Rental::find($id);
+        $coche = Car::find($alquiler->car_id);
 
-        return view('user.misAlquileres', ['alquileresSubidos' => $alquileresSubidos, 'alquileresContratados' => $alquileresContratados]);
+        return view('user.confirmarEliminacionAlquiler', ['alquiler' => $alquiler, 'coche' => $coche]); 
+    }
+
+    public function eliminarAlquiler($id){
+        $alquiler = Rental::find($id);
+        $user = User::find($alquiler->user_id);
+        $returnDate = date_create($alquiler->returnDate);
+        $pickUpDate = date_create($alquiler->pickUpDate);
+        $diasAlquiler = date_diff($pickUpDate, $returnDate)->format('%R%a');
+        $precioAlquiler = $diasAlquiler * $alquiler->price;
+
+        $user->balance += $precioAlquiler;
+        $user->save();
+
+        $alquiler->delete();
     }
 }

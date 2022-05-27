@@ -32,12 +32,14 @@
                 <ul class="lista-datos">
                     <li><i class="icono fas fa-map-signs"></i> Dirección de email: {{$user->email}}</li>
                     <li><i class="icono fas fa-phone-alt"></i> Telefono: {{$user->telephone}}</li>
-                    <li><i class="icono fas fa-rv"></i> Viajes compartidos: {{$numViajesSubidos}}</li>
+                    <li><i class="icono fas fa-cars"></i> Viajes compartidos: {{$numViajesSubidos}}</li>
+                    <li><i class="icono fas fa-shuttle-van"></i> Alquileres subidos: {{$numAlquileresSubidos}}</li>
                 </ul>
                 <ul class="lista-datos">
                     <li><i class="icono fas fa-calendar-alt"></i> Edad: {{$edad}}</li>
                     <li><i class="icono fas fa-user-check"></i>Registro: {{$user->created_at}}</li>
-                    <li><i class="icono fas fa-code"></i> Viajes contratados: {{$numViajesContratados}}</li>
+                    <li><i class="icono fas fa-car-crash"></i> Viajes contratados: {{$numViajesContratados}}</li>
+                    <li><i class="icono fas fa-tire"></i> Alquileres contratados: {{$numAlquileresContratados}}</li>
                 </ul>
                 @if (\Session::has('success'))
                     <p style="color:#06c730b6; font-size: 20px; margin-left:200px"><strong>{!! \Session::get('success') !!}</strong></p>
@@ -52,7 +54,7 @@
                 <div class="center">
                     @if(Auth::user()->id == $user->id)
                         <a href="/misviajes" style="margin: 1.25rem;margin-left: 130px;" role="button" class="btn btn-dark">Mis viajes</a>
-                        <a href="#" style="margin: 1.25rem" role="button" class="btn btn-dark">Mis alquileres</a>
+                        <a href="/misalquileres" style="margin: 1.25rem" role="button" class="btn btn-dark">Mis alquileres</a>
                         <a href="/valoraciones/{{Auth::user()->id}}" style="margin: 1.25rem" role="button" class="btn btn-dark">Mis valoraciones</a>
                     @else
                         <a href="/valorar/{{$user->id}}" style="margin: 1.25rem;margin-left: 190px;" role="button" class="btn btn-dark">Dejar valoración</a>
