@@ -90,9 +90,9 @@
                                     <option value="Familiar" selected>Familiar</option>
                                     <option value="Berlina">Berlina</option>
                                     <option value="Monovolumen">Monovolumen</option>
-                                    <option value="Deportivo">Deportivo</option>
-                                    <option value="Furgoneta">Furgoneta</option>
-                                    <option value="Limusina">Limusina</option>
+                                    <option value="Descapotable">Descapotable</option>
+                                    <option value="Utilitario">Utilitario</option>
+                                    <option value="Todoterreno">Todoterreno</option>
                                 </select>
                                 @error('typeCar')
                                     <span class="invalid-feedback" role="alert">

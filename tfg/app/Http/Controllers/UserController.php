@@ -37,13 +37,13 @@ class UserController extends Controller
 
         //no tiene en cuenta ni mayus ni tildes
         if(!is_null($origen) && !is_null($destino)){
-            $travels = Travel::where('origin', '=', $origen)->where('destination', '=', $destino)->orderBy('date')->get();
+            $travels = Travel::where('origin', '=', $origen)->where('destination', '=', $destino)->orderBy('date')->simplePaginate(6);
         }
         else if(!is_null($req->get('origen'))){
-            $travels = Travel::where('origin', '=', $origen)->orderBy('date')->get();
+            $travels = Travel::where('origin', '=', $origen)->orderBy('date')->simplePaginate(6);
         }
         else if(!is_null($req->get('destino'))){
-            $travels = Travel::where('destination', '=', $destino)->orderBy('date')->get();
+            $travels = Travel::where('destination', '=', $destino)->orderBy('date')->simplePaginate(6);
         }
         else{
             $travels = Travel::orderBy('date')->simplePaginate(6);
@@ -229,8 +229,31 @@ class UserController extends Controller
         )->with('delete', 'Tu valoración ha sido eliminada');
     }
 
-    public function alquileres(){
-        $alquileres = Rental::simplePaginate(6);
+    public function alquileres(Request $req){
+        $alquileres = Rental::orderBy('pickUpDate')->simplePaginate(6);
+        $brand = $req->get('brand');
+        $model = $req->get('model');
+        $typeCar = $req->get('typeCar');
+        $fuel = $req->get('fuel');
+        $transmision = $req->get('transmision');
+
+        //no tiene en cuenta ni mayus ni tildes
+        if(!is_null($brand) && !is_null($model)){
+            $coches = Car::select('id')->where('brand', '=', $brand)->where('model', '=', $model)->where('carType', '=', $typeCar)->where('fuelType', '=', $fuel)->where('transmission', '=', $transmision)->get(); 
+            $alquileres = Rental::whereIn('car_id', $coches)->orderBy('pickUpDate')->simplePaginate(6);
+        }
+        else if(!is_null($brand)){
+            $coches = Car::select('id')->where('brand', '=', $brand)->where('carType', '=', $typeCar)->where('fuelType', '=', $fuel)->where('transmission', '=', $transmision)->get(); 
+            $alquileres = Rental::whereIn('car_id', $coches)->orderBy('pickUpDate')->simplePaginate(6);
+        }
+        else if(!is_null($model)){
+            $coches = Car::select('id')->where('model', '=', $model)->where('carType', '=', $typeCar)->where('fuelType', '=', $fuel)->where('transmission', '=', $transmision)->get(); 
+            $alquileres = Rental::whereIn('car_id', $coches)->orderBy('pickUpDate')->simplePaginate(6);
+        }
+        else if(!is_null($typeCar)){
+            $coches = Car::select('id')->where('carType', '=', $typeCar)->where('fuelType', '=', $fuel)->where('transmission', '=', $transmision)->get(); 
+            $alquileres = Rental::whereIn('car_id', $coches)->orderBy('pickUpDate')->simplePaginate(6);
+        }
 
         return view('user.alquileres', ['alquileres' => $alquileres]);
     }
@@ -245,8 +268,9 @@ class UserController extends Controller
 
     public function detallesAlquiler($id){
         $alquiler = Rental::find($id);
+        $coche = Car::find($alquiler->car_id);
 
-        return view('user.detallesAlquiler', ['alquiler' => $alquiler]);
+        return view('user.detallesAlquiler', ['alquiler' => $alquiler, 'coche' => $coche]);
     }
 
     public function formNuevoAlquiler(){

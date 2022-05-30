@@ -2,18 +2,40 @@
 @section('content')
 <section class="travels container">
     <h2 class="subtitle">Catálogo de coches para alquilar</h2>
-    <!--<div class="buscar">
+    <br/>
+    <br/>
+    <div class="buscar" style="margin-left: 100px">
         <form method="GET">
-            <input type="text" id="origen" name="origen" placeholder="Origen">
-            <input type="text" id="destino" name="destino" placeholder="Destino">
+            <input type="text" id="brand" name="brand" placeholder="Marca" style="margin-left: 60px">
+            <input type="text" id="model" name="model" placeholder="Modelo">
             <br/>
             <br/>
+            <select style="padding: 5px; width: 300px; height:40px; background-color: white; border: 1px solid silver;border-radius: 30px" name="typeCar" required>
+                <option value="Familiar" selected>Familiar</option>
+                <option value="Berlina">Berlina</option>
+                <option value="Monovolumen">Monovolumen</option>
+                <option value="Descapotable">Descapotable</option>
+                <option value="Utilitario">Utilitario</option>
+                <option value="Todoterreno">Todoterreno</option>
+            </select>
+            <select style="padding: 5px; width: 300px; height:40px; background-color: white; border: 1px solid silver;border-radius: 30px" name="fuel" required>
+                <option value="Gasolina" selected>Gasolina</option>
+                <option value="Diésel">Diésel</option>
+                <option value="Híbrido">Híbrido</option>
+                <option value="Eléctrico">Eléctrico</option>
+            </select>
+            <select style="padding: 5px; width: 300px; height:40px; background-color: white; border: 1px solid silver;border-radius: 30px"  name="transmision" required>
+                <option value="Manual" selected>Manual</option>
+                <option value="Automático">Automático</option>
+            </select>
             <div class="btnSearch">
                 <button type="submit" class="btnsend"><i class="fa fa-search icon"></i></button>
             </div>
         </form>
         <br/>
-    </div>!-->
+    </div>
+    <br/>
+    <br/>
     <br/>
     <br/>
     @if (\Session::has('success'))
@@ -61,6 +83,10 @@
                 {!! $alquileres->links() !!}
             <div>
         @else
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <div class="alert alert-success" style="text-align: center;" role="alert">
                 <strong style="font-size: 20px">No hay resultados para su búsqueda</strong>
             </div>
