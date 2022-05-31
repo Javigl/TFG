@@ -64,7 +64,11 @@
                         <p class="price__features">Anfitrión: {{ $anfitrion->name }}</p>
                     </div>
                     @if(is_null($rentUser))
-                        <a href="/reservarAlquiler/{{$a->id}}" class="price__cta free">Alquilar vehículo</a>
+                        @if (Auth::user()->id == $anfitrion->id)
+                            <a href="/eliminarAlquiler/{{$a->id}}" class="price__cta desunirme">Eliminar alquiler</a>
+                        @else
+                            <a href="/reservarAlquiler/{{$a->id}}" class="price__cta free">Alquilar vehículo</a>
+                        @endif
                     @else
                         @if(Auth::user()->id != $rentUser->id)
                             <a class="price__cta full">Vehículo alquilado</a>                

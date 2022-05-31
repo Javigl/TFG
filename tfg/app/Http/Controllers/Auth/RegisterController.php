@@ -79,7 +79,7 @@ class RegisterController extends Controller
             'lastname' => $data['lastname'],
             'birthday' => $data['fecha'],
             'telephone' => $data['telephone'],
-            'points' => 0,
+            'points' => 20,
             'admin' => false,
             'balance' => 0.0,
             'blocked' => false,

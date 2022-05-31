@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(#313daa, transparent);
+}
+
+.card{
+    display: flex;
+    align-items: center;
+    width: 1000px;
+    height: 550px;
+    background-color: #fff;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.25);
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.card .imgBox{
+    position: relative;
+    min-width: 350px;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.card .imgBox img{
+    border-radius: 20px;
+    width: 85%;
+}
+
+.card .details{
+    position: relative;
+    min-width: 300px;
+    background: #3f4bb3;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    color: #fff;
+}
+
+.card .details .title h3{
+    font-size: 40px;
+}
+
+.card .details .title h3 small{
+    font-weight: 200;
+    font-size: 0.6em;
+}
+
+.card .details .description h4{
+    font-size: 25px;
+}
+
+.card .details .description p{
+    font-size: 18px;
+}
+
+.card .details .buy{
+    display: flex;
+}
+
+.card .details .buy .price{
+    margin-right: 90px;
+    font-size: 1.6em;
+}
+
+.card .details .buy .btn{
+    margin-right: 20px;
+    background: #fff;
+    padding: 0.5em 0.8em;
+    text-transform: uppercase;
+    border-radius: 10px;
+}
+
+.card .details .buy .btn:hover{
+    background-color: #b4bbf0;
+}
+
+.card .details .buy .btn a{
+    text-decoration: none;
+    color: #4c55ac;
+}
+

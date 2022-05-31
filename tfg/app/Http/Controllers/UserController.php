@@ -269,8 +269,15 @@ class UserController extends Controller
     public function detallesAlquiler($id){
         $alquiler = Rental::find($id);
         $coche = Car::find($alquiler->car_id);
+        $anfitrion = User::find($coche->user_id);
 
-        return view('user.detallesAlquiler', ['alquiler' => $alquiler, 'coche' => $coche]);
+        $returnDate = date_create($alquiler->returnDate);
+        $pickUpDate = date_create($alquiler->pickUpDate);
+        $diasAlquiler = date_diff($pickUpDate, $returnDate)->format('%R%a');
+
+        $precioAlquiler = $diasAlquiler * $alquiler->price;
+
+        return view('user.detallesAlquiler', ['alquiler' => $alquiler, 'coche' => $coche, 'anfitrion' => $anfitrion, 'precio' => $precioAlquiler]);
     }
 
     public function formNuevoAlquiler(){

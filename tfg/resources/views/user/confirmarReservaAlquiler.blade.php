@@ -55,7 +55,7 @@
                             <br/>
                         @endif
                         <button type="submit" class="btn btn-primary width-100">Confirmar alquiler</button>
-                        <a href="/alquileres" role="button" class="btn btn-danger width-100">Volver</a>
+                        <a href="javascript: history.go(-1)" role="button" class="btn btn-danger width-100">Volver</a>
                     </form>
                     <small class="d-inline-block text-muted mt-5">Derechos reservados &copy; Javier García Lillo</small>
                 </div>

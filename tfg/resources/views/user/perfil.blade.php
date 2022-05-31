@@ -63,8 +63,7 @@
                 </div>
             </div>
         </div>
-
-        <a href="/" style="margin: 1.25rem;" role="button" class="btn btn-danger">Volver</a>
+        <a href="javascript: history.go(-1)" style="margin: 1.25rem;" role="button" class="btn btn-danger">Volver</a>
     </section>
 </body>
 </html>

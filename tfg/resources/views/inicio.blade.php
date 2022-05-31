@@ -84,42 +84,47 @@
 
             <section class="questions container">
                 <h2 class="subtitle">Preguntas frecuentes</h2>
-                <p class="questions__paragraph">Una vez este la web realizada introducire como hacer cosas como, compartir coche, usirse a viajes.... etc</p>
+                <p class="questions__paragraph">Aquí puedes encontrar respuesta a algunas de las preguntas más frecuentes realizadas por nuestros usuarios. ¡Esperamos que te ayuden!</p>
 
                 <section class="questions__container">
                     <article class="questions__padding">
                         <div class="questions__answer">
-                            <h3 class="questions__title">¿Qué es esto 1? 
+                            <h3 class="questions__title">¿Cómo compartir tu vehículo para que pueda ser alquilado por otros usuarios? 
                                 <span class="questions__arrow">
                                     <img src="{{asset('images/arrow.svg')}}" class="questions__img">
                                 </span>
                             </h3>
-                            <p class="questions__show">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, odit veniam. Labore pariatur quas amet commodi ullam, assumenda velit! Rem ea sint quaerat eligendi provident magni repellat quos officia quo?
-                            consectetur adipisicing elit. Laudantium, odit veniam. Labore pariatur quas amet commodi ullam, assumenda velit! Rem ea sint quaerat eligendi provident magni repellat quos officia quo? consectetur adipisicing elit.</p>
+                            <p class="questions__show">Lo primero que debes hacer es estar registrado en nuestra web (puedes acceder desde el enlace que hay al inicio de la web). 
+                                Una vez registrado, accede al apartado de Mis Alquileres y ahí encontrarás el boton de acceso al formulario que te hará compartir tu vehículo 
+                                (botón Subir anuncio de vehículo).
+                            </p>
                         </div>
                     </article>
 
                     <article class="questions__padding">
                         <div class="questions__answer">
-                            <h3 class="questions__title">¿Qué es esto 2? 
+                            <h3 class="questions__title">¿Cómo compartir un viaje para que se puedan unir a él otros usuarios? 
                                 <span class="questions__arrow">
                                     <img src="{{asset('images/arrow.svg')}}" class="questions__img">
                                 </span>
                             </h3>
-                            <p class="questions__show">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, odit veniam. Labore pariatur quas amet commodi ullam, assumenda velit! Rem ea sint quaerat eligendi provident magni repellat quos officia quo?
-                            consectetur adipisicing elit. Laudantium, odit veniam. Labore pariatur quas amet commodi ullam, assumenda velit! Rem ea sint quaerat eligendi provident magni repellat quos officia quo? consectetur adipisicing elit. </p>
+                            <p class="questions__show">Lo primero que debes hacer es estar registrado en nuestra web (puedes acceder desde el enlace que hay al inicio de la web). 
+                                Una vez registrado, accede al apartado de Mis Viajes y ahí encontrarás el boton de acceso al formulario que te hará compartir tu viaje 
+                                (botón Subir nuevo viaje).</p>
                         </div>
                     </article>
 
                     <article class="questions__padding">
                         <div class="questions__answer">
-                            <h3 class="questions__title">¿Qué es esto 3? 
+                            <h3 class="questions__title">¿Cómo consigo CarPoints? 
                                 <span class="questions__arrow">
                                     <img src="{{asset('images/arrow.svg')}}" class="questions__img">
                                 </span>
                             </h3>
-                            <p class="questions__show">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, odit veniam. Labore pariatur quas amet commodi ullam, assumenda velit! Rem ea sint quaerat eligendi provident magni repellat quos officia quo?
-                            consectetur adipisicing elit. Laudantium, odit veniam. Labore pariatur quas amet commodi ullam, assumenda velit! Rem ea sint quaerat eligendi provident magni repellat quos officia quo? consectetur adipisicing elit.</p>
+                            <p class="questions__show">Esto es un mecanismo que usamos para recompensar a nuestros usuarios por utilizar nuestros servicios. Solo por registrarte obtienes 20CP
+                                que podrás canjear al realizar alquileres o unirte a viajes. Cada CP te quita 0.5€ de tu importe y por cada alquileres que hagas, o por viaje al que te unas, 
+                                obtienes 1CP.
+                            </p>
                         </div>
                     </article>
                 </section>
