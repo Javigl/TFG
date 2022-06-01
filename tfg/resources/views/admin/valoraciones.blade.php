@@ -24,7 +24,7 @@
                 <tr>
                     <td>id</td>
                     <td>Puntuación</td>
-                    <td>Opinión</td>
+                    <td>Valoración</td>
                     <td>Valorador</td>
                     <td>Valorado</td>
                     <td>Eliminar valoracion</td>

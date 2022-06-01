@@ -35,7 +35,7 @@
                 <li>
                     <a href="/administrarValoraciones">
                         <span class="icon"><ion-icon name="chatbox-ellipses-outline"></ion-icon></span>
-                        <span class="title">Opiniones</span>
+                        <span class="title">Valoraciones</span>
                     </a>
                 </li>
                 <li>
@@ -90,7 +90,7 @@
                 <div class="card">
                     <div>
                         <div class="numbers">{{ $numOpiniones }}</div>
-                        <div class="cardName">Opiniones</div>
+                        <div class="cardName">Valoraciones</div>
                     </div>
                     <div class="iconBx">
                         <ion-icon name="chatbox-ellipses-outline"></ion-icon>

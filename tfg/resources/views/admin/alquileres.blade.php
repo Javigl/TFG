@@ -28,7 +28,8 @@
                     <td>Fecha devolución</td>
                     <td>Precio</td>
                     <td>Coche(id)</td>
-                    <td>Usuario(id)</td>
+                    <td>Anfitrión(id)</td>
+                    <td>Usuario solicitante(id)</td>
                     <td>Eliminar anuncio</td>
                 </tr>
             </thead>
@@ -36,6 +37,7 @@
                 @foreach($alquileres as $a)
                     <?php
                         $coche = App\Models\Car::find($a->car_id);
+                        $anfitrion = App\Models\User::find($coche->user_id);
                         $usuario = App\Models\User::find($a->user_id);
                     ?>
                     <tr>
@@ -45,11 +47,11 @@
                         <td>{{ $a->returnDate }}</td>
                         <td>{{ $a->price }}</td>
                         <td>{{ $coche->brand }} {{$coche->model}}({{ $coche->id }})</td>
-
+                        <td>{{ $anfitrion->name }}({{ $anfitrion->id }})</td>
                         @if (!is_null($usuario))
                             <td>{{ $usuario->name }}({{ $usuario->id }})</td>
                         @else
-                            <td>NULL</td>
+                            <td>Vehículo NO alquilado</td>
                         @endif
     
                         <td>
