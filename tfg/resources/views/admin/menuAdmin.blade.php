@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/administrarAlquileres">
                         <span class="icon"><ion-icon name="bag-handle-outline"></ion-icon></span>
                         <span class="title">Alquileres</span>
                     </a>

@@ -116,4 +116,33 @@ class AdminController extends Controller
 
         return redirect('/administrarValoraciones')->with('success', 'Eliminación realizada con éxito');
     }
+
+    public function alquileres(Request $req){
+        $param = $req->get('param');
+        $alquileres = Rental::all();
+        $numUsers = sizeof(User::all());
+        $numViajes = sizeof(Travel::all());
+        $numAlquileres = sizeof($alquileres);
+        $numOpiniones = sizeof(Rating::all());
+
+        if(!is_null($param)){
+            $alquileres = Rental::where('city', 'LIKE', '%' . $param . '%')->orderBy('id', 'asc')->get();
+            if(sizeof($alquileres) == 0){
+                $alquileres = Rental::where('user_id', '=', $param)->orderBy('id', 'asc')->get();
+                if(sizeof($alquileres) == 0){
+                    $alquileres = Rental::where('car_id', '=', $param)->orderBy('id', 'asc')->get();
+                }
+            }
+        }
+
+        return view('admin.alquileres', ['alquileres' => $alquileres, 'numUsers' => $numUsers, 'numViajes' => $numViajes, 
+        'numAlquileres' => $numAlquileres, 'numOpiniones' => $numOpiniones]);
+    }
+
+    public function eliminarAlquiler($id){
+        $alquiler = Rental::find($id);
+        $alquiler->delete();
+
+        return redirect('/administrarAlquileres')->with('success', 'Eliminación realizada con éxito');
+    }
 }

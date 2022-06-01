@@ -8,7 +8,11 @@
         </div>
     </form>
 </div>
-
+@if (\Session::has('success'))
+    <div class="alert alert-success" role="alert">
+        <strong style="font-size: 25px; margin-left: 500px">{!! \Session::get('success') !!}</strong>
+    </div>
+@endif
 <div class="details">
     <div class="recentOrders">
         <div class="cardHeader">
@@ -40,7 +44,7 @@
                         <td>{{ $valorado->name }}({{ $o->user2_id }})</td>
                         <td>
                             <a style="text-decoration:none; margin-left: 28px;" href="/eliminarValoracionAdmin/{{$o->id}}"> 
-                                <button class="btn lock" title="Eliminar viaje"><ion-icon name="close-circle-outline"></ion-icon></button>
+                                <button class="btn lock" title="Eliminar valoracion"><ion-icon name="close-circle-outline"></ion-icon></button>
                             </a>
                         </td>
                     </tr>

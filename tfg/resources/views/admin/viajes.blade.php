@@ -8,7 +8,11 @@
         </div>
     </form>
 </div>
-
+@if (\Session::has('success'))
+    <div class="alert alert-success" role="alert">
+        <strong style="font-size: 25px; margin-left: 500px">{!! \Session::get('success') !!}</strong>
+    </div>
+@endif
 <div class="details">
     <div class="recentOrders">
         <div class="cardHeader">
