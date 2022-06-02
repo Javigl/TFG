@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Rating;
 use App\Models\Rental;
 use Auth;
+use Hash;
 
 class UserController extends Controller
 {
@@ -29,6 +30,57 @@ class UserController extends Controller
 
         return view('user.perfil', ['user' => $user, 'numViajesContratados' => $numViajesContratados, 'numViajesSubidos' => $numViajesSubidos, 
                     'numAlquileresSubidos' => $numAlquileresSubidos, 'numAlquileresContratados' => $numAlquileresContratados]);
+    }
+
+    public function formEditarPerfil(){
+        $user = User::find(Auth::user()->id);
+
+        return view('user.formEditarPerfil', ['user' => $user]);
+    }
+
+    public function editarPerfil(Request $req){
+        $user = Auth::user();
+        $nombre = $req->get('name');
+        $apellidos = $req->get('lastname');
+        $email = $req->get('email');
+        $password = $req->get('password');
+        $tel = $req->get('telephone');
+        $fecha = $req->get('birthday');
+
+        if(!is_null($nombre)){
+            $user->name = $nombre;
+        }   
+        if(!is_null($apellidos)){
+            $user->lastname = $apellidos;
+        }
+        if(!is_null($email)){
+            $emailExiste = User::where('email', '=', $email)->first();
+            if(!is_null($emailExiste) && Auth::user()->id != $emailExiste->id){
+                return redirect('/editarPerfil')->with('error', 'Email ya en uso');
+            }
+            $user->email = $email;
+        }
+        if(!is_null($password)){
+            $user->password = Hash::make($password);
+        }
+        if(!is_null($tel)){
+            if(!preg_match("/^[0-9]{9}$/", $tel)){
+                return redirect('/editarPerfil')->with('error', 'El teléfono debe estar formado por 9 números');
+            }
+            $user->telephone = $tel; 
+        }
+        if(!is_null($fecha)){
+            $edad = \Carbon\Carbon::parse($fecha)->age;
+            if($edad < 18){
+                return redirect('/editarPerfil')->with('error', 'Debes ser mayor de edad');
+            }
+            $user->birthday = $fecha;
+        }
+        $user->save();
+
+        return redirect()->action(
+            [UserController::class, 'perfil'], ['id' => Auth::user()->id]
+        )->with('success', 'Perfil editado con éxito');
     }
 
     public function viajes(Request $req){

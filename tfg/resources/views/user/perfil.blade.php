@@ -27,6 +27,9 @@
             <div class="perfil-usuario-bio">
                 <h3 class="titulo">{{$user->name}} {{$user->lastname}}</h3>
                 <p class="text-muted">Usuario de CarSite</p>
+                @if (Auth::user()->id == $user->id)
+                    <a href="/editarPerfil" style="margin-left: 570px; padding 10px" role="button" class="btn btn-primary">Editar perfil</a>
+                @endif
             </div>
             <div class="perfil-usuario-footer">
                 <ul class="lista-datos">
@@ -37,7 +40,7 @@
                 </ul>
                 <ul class="lista-datos">
                     <li><i class="icono fas fa-calendar-alt"></i> Edad: {{$edad}}</li>
-                    <li><i class="icono fas fa-user-check"></i>Registro: {{$user->created_at}}</li>
+                    <li><i class="icono fas fa-user-check"></i>Registro: {{$user->created_at->format('Y-m-d')}}</li>
                     <li><i class="icono fas fa-car-crash"></i> Viajes contratados: {{$numViajesContratados}}</li>
                     <li><i class="icono fas fa-tire"></i> Alquileres contratados: {{$numAlquileresContratados}}</li>
                 </ul>
@@ -63,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <a href="javascript: history.go(-1)" style="margin: 1.25rem;" role="button" class="btn btn-danger">Volver</a>
+        <a href="/" style="margin: 1.25rem;" role="button" class="btn btn-danger">Volver</a>
     </section>
 </body>
 </html>

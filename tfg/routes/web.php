@@ -21,6 +21,8 @@ Route::get('/inicio', function () {
 
 Route::middleware('user')->group(function(){
     Route::get('/perfil/{id}',[App\Http\Controllers\UserController::class, 'perfil']);
+    Route::get('/editarPerfil',[App\Http\Controllers\UserController::class, 'formEditarPerfil']);
+    Route::post('/editarPerfil',[App\Http\Controllers\UserController::class, 'editarPerfil']);
     Route::get('/user',[App\Http\Controllers\UserController::class, 'viajes']);
     Route::get('/viajes',[App\Http\Controllers\UserController::class, 'viajes']);
     Route::get('/misviajes',[App\Http\Controllers\UserController::class, 'misviajes']);

@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Nuevo viaje</title>
+    <title>Editar perfil</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -30,45 +30,24 @@
             </div>
             <div class="col-xl-7 col-lg-12 d-flex">
                 <div class="container align-self-center p-6">
-                    <h1 class="mb-3"><b>Subir nuevo viaje</b></h1>
-                    <p class="text-muted mb-5"> Ingresa la siguiente información para compartir tu viaje</p>
-                    <span class="text-danger"><b>*Campo obligatorio</b></span>
-                    <form method="POST" action="/nuevoViaje">
+                    <h1 class="mb-3"><b>Editar perfil</b></h1>
+                    <p class="text-muted mb-5">Completa aquellos campos que desees modificar</p>
+                    <form method="POST" action="/editarPerfil">
                         @csrf
                         <div class="row mb-2">
                             <div class="form-group col-md-6">
-                                <label for="origen"><b>Origen</b><span class="text-danger">*</span></label>
-                                <input id="origen" name="origen" type="text" placeholder="Origen del viaje" class="form-control" autofocus required>
-                                @error('origen')
+                                <label for="name"><b>Nombre</b></label>
+                                <input id="name" name="name" type="text" placeholder="Tu nombre" class="form-control" autofocus>
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="destination"><b>Destino</b><span class="text-danger">*</span></label>
-                                <input id="destination" name="destination" type="text" placeholder="Destino del viaje" class="form-control" required>
-                                @error('destination')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="form-group col-md-6">
-                                <label for="fecha"><b>Fecha</b><span class="text-danger">*</span></label>
-                                <input id="fecha" name="fecha" type="date" placeholder="Fecha del viaje" class="form-control" required>
-                                @error('fecha')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="hora"><b>Hora</b><span class="text-danger">*</span></label>
-                                <input id="hora" name="hora" type="time" placeholder="Hora del viaje" class="form-control" required>
-                                @error('hora')
+                                <label for="lastname"><b>Apellidos</b></label>
+                                <input id="lastname" name="lastname" type="text" placeholder="Tus apellidos" class="form-control">
+                                @error('lastname')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -77,12 +56,42 @@
                         </div>
                         <div class="row mb-2">
                             <div class="form-group col-md-6">
-                                <label for="numAsientos"><b>Número de asientos</b><span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="numAsientos" name="numAsientos" placeholder="Introduce la cantidad a añadir" min="1" required>
+                                <label for="email"><b>Email</b></label>
+                                <input id="email" name="email" type="email" placeholder="Tu nuevo correo electrónico" class="form-control">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="precio"><b>Precio/asiento(€)</b><span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="precio" name="precio" step="0.01" placeholder="Introduce la cantidad a añadir" min="0" required>
+                                <label for="password"><b>Password</b></label>
+                                <input id="password" name="password" type="password" placeholder="Tu nueva contraseña" class="form-control">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="form-group col-md-6">
+                                <label for="birthday"><b>Fecha de nacimiento</b></label>
+                                <input id="birthday" name="birthday" type="date" placeholder="Fecha del viaje" class="form-control">
+                                @error('birthday')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="telephone"><b>Teléfono</b></label>
+                                <input id="telephone" type="text" placeholder="Tu teléfono" class="form-control" name="telephone">
+                                @error('telephone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <br>
@@ -93,8 +102,8 @@
                             <br/>
                             <br/>
                         @endif
-                        <button type="submit" class="btn btn-primary width-100">Publicar</button>
-                        <a href="/misViajes" role="button" class="btn btn-danger width-100">Volver</a>
+                        <button type="submit" class="btn btn-primary width-100">Confirmar cambios</button>
+                        <a href="/perfil/{{Auth::user()->id}}" role="button" class="btn btn-danger width-100">Volver</a>
                     </form>
                     <small class="d-inline-block text-muted mt-5">Derechos reservados &copy; Javier García Lillo</small>
                 </div>

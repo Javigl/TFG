@@ -54,7 +54,7 @@
                             <a class="price__cta full">Completo</a>
                         @endif
                         <br/>
-                        <a href="/perfil/{{$v->id}}" class="price__cta perfilUser">Ver perfil del anfitrión</a>
+                        <a href="/perfil/{{$v->user->id}}" class="price__cta perfilUser">Ver perfil del anfitrión</a>
                     @else
                         <a href="/perfil/{{Auth::user()->id}}" class="price__cta perfilUser">Mi perfil</a>
                     @endif
