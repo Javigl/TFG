@@ -22,7 +22,7 @@
                         <p class="price__features">Huecos disponibles: {{ $v->places }}</p>
                         <p class="price__features">Anfitrión: {{ $v->user->name }}</p>
                     </div>
-                    <a href="/eliminarViaje/{{$v->id}}" class="price__cta desunirme">Cancelar viaje</a>
+                    <a href="/eliminarViaje/{{$v->id}}" class="price__cta desunirme">Eliminar viaje</a>
                 </div>
             @endforeach
         </div>

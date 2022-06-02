@@ -30,7 +30,7 @@
             </div>
             <div class="col-xl-7 col-lg-12 d-flex">
                 <div class="container align-self-center p-6">
-                    <h1 class="mb-3"><b>Cancelar viaje</b></h1>
+                    <h1 class="mb-3"><b>Eliminar viaje</b></h1>
                     <p class="text-muted mb-5">Estás a punto de eliminar tu viaje hacia {{$viaje->destination}}</p>
                     <p class="text-muted mb-5">A los pasajeros se les será reembolsado el importe por su lugar en el viaje, pero no sus carpoints en caso de que
                         usaran.

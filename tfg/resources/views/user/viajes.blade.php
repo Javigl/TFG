@@ -56,6 +56,8 @@
                         <br/>
                         <a href="/perfil/{{$v->user->id}}" class="price__cta perfilUser">Ver perfil del anfitrión</a>
                     @else
+                        <a href="/eliminarViaje/{{$v->id}}" class="price__cta desunirme">Eliminar viaje</a>
+                        <br/>
                         <a href="/perfil/{{Auth::user()->id}}" class="price__cta perfilUser">Mi perfil</a>
                     @endif
                 </div>

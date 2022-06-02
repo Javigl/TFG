@@ -64,5 +64,11 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'user' => \App\Http\Middleware\User::class,
         'admin' => \App\Http\Middleware\Admin::class,
+        'anfitrionViaje' => \App\Http\Middleware\AnfitrionViaje::class,
+        'anfitrionViajeEliminar' => \App\Http\Middleware\AnfitrionViajeEliminar::class,
+        'pasajeroViaje' => \App\Http\Middleware\PasajeroViaje::class,
+        'anfitrionAlquiler' => \App\Http\Middleware\AnfitrionAlquiler::class,
+        'solicitanteAlquiler' => \App\Http\Middleware\SolicitanteAlquiler::class,
+        'anfitrionAlquilerEliminar' => \App\Http\Middleware\AnfitrionAlquilerEliminar::class,
     ];
 }

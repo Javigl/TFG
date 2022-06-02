@@ -110,6 +110,41 @@ class UserController extends Controller
         return view('user.confirmarReservaViaje', ['viaje' => $viaje]);
     }
 
+    public function reservarViaje($id, Request $req){
+        $user = Auth::user();
+        $viaje = Travel::find($id);
+        $precioReserva = $viaje->price;
+
+        if($req->carpoints != 0 && !is_null($req->carpoints)){
+            if($req->carpoints > $user->points){
+                return redirect()->back()->with('loginError', 'Carpoints insuficientes, introduce menos');
+            }
+            else{
+                $precioReserva = $viaje->price - ($req->carpoints * 0.5);
+                if($precioReserva < 2){
+                    return redirect()->back()->with('loginError', 'La reserva debe tener un importe mínimo de 2€, usa menos carpoints');
+                }
+            }
+        }
+
+        if($precioReserva > $user->balance){
+            return redirect()->back()->with('loginError', 'Saldo insuficiente, carga más saldo');
+        }
+
+        $user->balance -= $precioReserva;
+        $user->points -= $req->carpoints - 1; //recibe un carpoint por reserva
+        $user->save();
+
+        $viaje->places -= 1;
+        $viaje->save();
+
+        $travel_user = new TravelUser;
+        $travel_user->user_id = $user->id;
+        $travel_user->travel_id = $viaje->id;
+        $travel_user->save();
+        return redirect('/viajes')->with('success', 'Tu reserva se ha realizado correctamente, vuelve al menú para seguir uniéndote a más viajes!');
+    }
+
     public function confirmarCancelacionViaje($id){
         $viaje = Travel::find($id);
 
@@ -153,41 +188,6 @@ class UserController extends Controller
         $viaje->delete();
 
         return redirect('/misviajes')->with('success', 'Eliminación realizada con éxito');
-    }
-
-    public function reservarViaje($id, Request $req){
-        $user = Auth::user();
-        $viaje = Travel::find($id);
-        $precioReserva = $viaje->price;
-
-        if($req->carpoints != 0 && !is_null($req->carpoints)){
-            if($req->carpoints > $user->points){
-                return redirect()->back()->with('loginError', 'Carpoints insuficientes, introduce menos');
-            }
-            else{
-                $precioReserva = $viaje->price - ($req->carpoints * 0.5);
-                if($precioReserva < 2){
-                    return redirect()->back()->with('loginError', 'La reserva debe tener un importe mínimo de 2€, usa menos carpoints');
-                }
-            }
-        }
-
-        if($precioReserva > $user->balance){
-            return redirect()->back()->with('loginError', 'Saldo insuficiente, carga más saldo');
-        }
-
-        $user->balance -= $precioReserva;
-        $user->points -= $req->carpoints - 1; //recibe un carpoint por reserva
-        $user->save();
-
-        $viaje->places -= 1;
-        $viaje->save();
-
-        $travel_user = new TravelUser;
-        $travel_user->user_id = $user->id;
-        $travel_user->travel_id = $viaje->id;
-        $travel_user->save();
-        return redirect('/viajes')->with('success', 'Tu reserva se ha realizado correctamente, vuelve al menú para seguir uniéndote a más viajes!');
     }
 
     public function misViajes(){
