@@ -47,13 +47,6 @@
                             </div>
                         </div>
                         <br>
-                        @if (\Session::has('loginError'))
-                            <span class="text-danger" role="alert">
-                                <strong>{!! \Session::get('loginError') !!}</strong>
-                            </span>
-                            <br/>
-                            <br/>
-                        @endif
                         <div class="row mb-2">
                             <div class="form-group col-md-6">
                                 <label><b>Puntuación</b></label>
@@ -73,7 +66,13 @@
                                 </div>
                             </div>
                         </div>
-                        <br/>
+                        @if (\Session::has('loginError'))
+                            <span class="text-danger" role="alert">
+                                <strong>{!! \Session::get('loginError') !!}</strong>
+                            </span>
+                            <br/>
+                            <br/>
+                        @endif
                         <button type="submit" class="btn btn-primary width-100">Enviar valoración</button>
                         <a href="/perfil/{{$user->id}}" role="button" class="btn btn-danger width-100">Volver</a>
                     </form>

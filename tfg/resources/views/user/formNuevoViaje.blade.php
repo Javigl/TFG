@@ -94,7 +94,7 @@
                             <br/>
                         @endif
                         <button type="submit" class="btn btn-primary width-100">Publicar</button>
-                        <a href="/misViajes" role="button" class="btn btn-danger width-100">Volver</a>
+                        <a href="/misviajes" role="button" class="btn btn-danger width-100">Volver</a>
                     </form>
                     <small class="d-inline-block text-muted mt-5">Derechos reservados &copy; Javier García Lillo</small>
                 </div>

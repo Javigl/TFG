@@ -246,6 +246,17 @@ class UserController extends Controller
     }
 
     public function guardarValoracion(Request $req, $id){
+        //si ha alquilado un vehiculo suyo o si se ha unido a alguno de sus viajes
+        $cochesAnfitrion = Car::select('id')->where('user_id', '=', $id)->get();
+        $rental = Rental::whereIn('car_id', $cochesAnfitrion)->where('user_id', '=', Auth::user()->id)->first();
+
+        $viajesAnfitrion = Travel::select('id')->where('user_id', '=', $id)->get();
+        $viajeContratado = TravelUser::whereIn('travel_id', $viajesAnfitrion)->where('user_id', '=', Auth::user()->id)->first();
+        
+        if(is_null($rental) && is_null($viajeContratado)){
+            return redirect()->back()->with('loginError', 'Debes valorar a un usuario con el que hayas tenido alguna interacción');
+        }
+
         //user_2: es el valorado 
         $valoracion = new Rating;
         $valoracion->opinion = $req->opinion;
