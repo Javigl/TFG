@@ -62,6 +62,13 @@
                             <br/>
                             <br/>
                         @endif
+                        @if (\Session::has('registrado'))
+                            <span class="text-success" role="alert">
+                                <strong>{!! \Session::get('registrado') !!}</strong>
+                            </span>
+                            <br/>
+                            <br/>
+                        @endif
                         <button type="submit" class="btn btn-primary width-100">Iniciar sesión</button>
                         <a href="/" role="button" class="btn btn-danger width-100">Volver</a>
                         <a href="/register" role="button" class="btn btn-light width-100">No tengo cuenta</a>

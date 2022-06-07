@@ -28,30 +28,26 @@
             </thead>
             <tbody>
                 @foreach($users as $u)
-                    <tr>
-                        <td>{{ $u->id }}</td>
-                        <td>{{ $u->name }}</td>
-                        <td>{{ $u->lastname }}</td>
-                        <td>{{ $u->email }}</td>
-                        <td>
-                            @if($u->admin)
-                                ADMIN
-                            @else
-                                {{ $u->points }}
-                            @endif
-                        </td>
-                        <td>
-                            @if($u->blocked)
-                                <a style="text-decoration:none; margin-left: 28px;" href="/habilitarUsuario/{{$u->id}}"> 
-                                    <button class="btn lock" title="Desbloquear usuario"><ion-icon name="lock-closed-outline"></ion-icon></button>
-                                </a>
-                            @else
-                                <a style="text-decoration:none; margin-left: 28px;" href="/bloquearUsuario/{{$u->id}}"> 
-                                    <button class="btn unlock" title="Bloquear usuario"><ion-icon name="lock-open-outline"></ion-icon></button>
-                                </a>
-                            @endif
-                        </td>
-                    </tr>
+                    @if(!$u->admin)
+                        <tr>
+                            <td>{{ $u->id }}</td>
+                            <td>{{ $u->name }}</td>
+                            <td>{{ $u->lastname }}</td>
+                            <td>{{ $u->email }}</td>
+                            <td>{{ $u->points }}</td>
+                            <td>
+                                @if($u->blocked)
+                                    <a style="text-decoration:none; margin-left: 28px;" href="/habilitarUsuario/{{$u->id}}"> 
+                                        <button class="btn lock" title="Desbloquear usuario"><ion-icon name="lock-closed-outline"></ion-icon></button>
+                                    </a>
+                                @else
+                                    <a style="text-decoration:none; margin-left: 28px;" href="/bloquearUsuario/{{$u->id}}"> 
+                                        <button class="btn unlock" title="Bloquear usuario"><ion-icon name="lock-open-outline"></ion-icon></button>
+                                    </a>
+                                @endif
+                            </td>
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>

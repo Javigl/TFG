@@ -20,14 +20,13 @@
     <br/>
     <br/>
     @if (\Session::has('success'))
+        <br/>
+        <br/>
         <div class="alert alert-success" role="alert">
             <strong style="font-size: 20px">{!! \Session::get('success') !!}</strong>
         </div>
         <br/>
-        <br/>
     @endif
-    <br/>
-    <br/>
     <div>
         @if(sizeof($viajes) > 0) 
             <div class="price__table">

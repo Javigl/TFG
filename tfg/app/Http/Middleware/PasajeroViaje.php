@@ -18,7 +18,7 @@ class PasajeroViaje
     public function handle($request, Closure $next)
     {
         $idViaje = explode("/", $request->path())[1];
-        $pasajero = TravelUser::where('user_id', '=', Auth::user()->id)->where('travel_id', '=', $id)->first();
+        $pasajero = TravelUser::where('user_id', '=', Auth::user()->id)->where('travel_id', '=', $idViaje)->first();
         
         if(is_null($pasajero)){
             return abort(403, 'No puedes cancelar viajes a los que no te has unido');

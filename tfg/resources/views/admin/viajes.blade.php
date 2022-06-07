@@ -27,6 +27,7 @@
                     <td>Destino</td>
                     <td>Fecha</td>
                     <td>Huecos</td>
+                    <td>Precio</td>
                     <td>Anfitrion(id)</td>
                     <td>Pasajeros(id's)</td>
                     <td>Eliminar viaje</td>
@@ -44,6 +45,7 @@
                         <td>{{ $v->destination }}</td>
                         <td>{{ $v->date }}</td>
                         <td>{{ $v->places }}</td>
+                        <td>{{ $v->price }}</td>
                         <td>{{ $anfitrion->name }} ({{ $anfitrion->id }})</td>
                         <td>
                             @if (sizeof($pasajeros) > 0)

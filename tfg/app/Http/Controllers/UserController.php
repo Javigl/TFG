@@ -158,7 +158,9 @@ class UserController extends Controller
         $travelUser->delete();
 
         $user->balance += $viaje->price;
-        $user->points -= 1; //Le quitamos el carpoint que recibe por reservar
+        if($user->points > 0){
+            $user->points -= 1; //Le quitamos el carpoint que recibe por reservar
+        }
         $user->save();
 
         $viaje->places += 1;
@@ -362,12 +364,13 @@ class UserController extends Controller
 
         $lastCar = Car::latest('id')->first();
         $lastId = $lastCar->id;
-
         $car = new Car;
+
         $imagen = $req->file("image");
-        $nombreImagen = Str::slug("car" . ($lastId + 1)). "." .$imagen->guessExtension();
-        $ruta = public_path("images/cars/" . $nombreImagen);
+        $nombreImagen = "car" . ($lastId + 1). ".jpg";
+        $ruta = public_path("images/cars/");
         $imagen->move($ruta, $nombreImagen);
+
         $car->image = $nombreImagen;
         $car->brand = $req->brand;
         $car->model = $req->model;
@@ -389,7 +392,7 @@ class UserController extends Controller
         $rental->car_id = $lastCar->id;
         $rental->save();
         //el usuario lo rellenaremos cuando un usuario alquile el coche anunciado
-        return redirect('/misAlquileres')->with('success', 'Viaje compartido correctamente!');
+        return redirect('/misalquileres')->with('success', '¡Anuncio subido correctamente!');
     }
 
     public function confirmarReservaAlquiler($id){
@@ -457,6 +460,9 @@ class UserController extends Controller
         $alquiler->user_id = null;
         $alquiler->save();
 
+        if($user->points != 0){
+            $user->points -= 1;
+        }
         $user->balance += $precioAlquiler;
         $user->save();
 
@@ -478,9 +484,12 @@ class UserController extends Controller
         $diasAlquiler = date_diff($pickUpDate, $returnDate)->format('%R%a');
         $precioAlquiler = $diasAlquiler * $alquiler->price;
 
-        $user->balance += $precioAlquiler;
-        $user->save();
+        if(!is_null($user)){
+            $user->balance += $precioAlquiler;
+            $user->save();
+        }
 
         $alquiler->delete();
+        return redirect('/alquileres')->with('success', 'Anuncio de alquiler eliminado correctamente');
     }
 }

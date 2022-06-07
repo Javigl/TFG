@@ -33,11 +33,10 @@
             @endforeach
         </div>
     @else
+        <br/>
         <div class="alert alert-success" role="alert">
             <strong style="font-size: 20px; margin-left: 425px">No has publicado alquileres todavía</strong>
         </div>
-        <br/>
-        <br/>
     @endif
     <br/>
     <br/>
@@ -70,7 +69,7 @@
     @else
         <br/>
         <div class="alert alert-success" role="alert">
-            <strong style="font-size: 20px; margin-left: 425px">No has contratado viajes todavía</strong>
+            <strong style="font-size: 20px; margin-left: 425px">No has contratado alquileres todavía</strong>
         </div>
         <br/>
         <br/>

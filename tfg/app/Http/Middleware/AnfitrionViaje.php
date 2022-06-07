@@ -20,7 +20,10 @@ class AnfitrionViaje
         $idViaje = explode("/", $request->path())[1];
         $viaje = Travel::find($idViaje);
         
-        if(Auth::user()->id == $viaje->user_id){
+        if(is_null($viaje)){
+            return abort(403, 'No existe ningún viaje con ese ID');
+        }
+        else if(Auth::user()->id == $viaje->user_id ){
             return abort(403, 'Debes reservar viajes que no hayas compartido tú');
         }
         else{

@@ -64,7 +64,7 @@ class AdminController extends Controller
         $numOpiniones = sizeof(Rating::all());
 
         if(!is_null($param)){
-            $travels = User::where('id', '=', $param)->get();
+            $travels = Travel::where('id', '=', $param)->get();
             if(sizeof($travels) == 0){
                 $travels = Travel::where('origin', 'LIKE', '%' . $param . '%')->orWhere('destination', 'LIKE', '%' . $param . '%')->orderBy('id', 'asc')->get();
                 if(sizeof($travels) == 0){
@@ -141,8 +141,19 @@ class AdminController extends Controller
 
     public function eliminarAlquiler($id){
         $alquiler = Rental::find($id);
-        $alquiler->delete();
+        $user = User::find($alquiler->user_id);
+        
+        $returnDate = date_create($alquiler->returnDate);
+        $pickUpDate = date_create($alquiler->pickUpDate);
+        $diasAlquiler = date_diff($pickUpDate, $returnDate)->format('%R%a');
+        $precioAlquiler = $diasAlquiler * $alquiler->price;
 
+        if(!is_null($user)){
+            $user->balance += $precioAlquiler;
+            $user->save();
+        }
+
+        $alquiler->delete();
         return redirect('/administrarAlquileres')->with('success', 'Eliminación realizada con éxito');
     }
 }

@@ -39,6 +39,9 @@
     <br/>
     <br/>
     @if (\Session::has('success'))
+        <br/>
+        <br/>
+        <br/>
         <div class="alert alert-success" role="alert">
             <strong style="font-size: 25px; margin-left: 345px">{!! \Session::get('success') !!}</strong>
         </div>

@@ -39,7 +39,7 @@
                     <form method="POST" action="/cancelarAlquiler/{{$alquiler->id}}">
                         @csrf
                         <button type="submit" class="btn btn-primary width-100">Sí</button>
-                        <a href="/misalquileres" role="button" class="btn btn-danger width-100">No</a>
+                        <a href="javascript: history.go(-1)" role="button" class="btn btn-danger width-100">No</a>
                     </form>
                     <small class="d-inline-block text-muted mt-5">Derechos reservados &copy; Javier García Lillo</small>
                 </div>
