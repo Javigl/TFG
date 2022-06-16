@@ -46,10 +46,10 @@ Route::middleware('user')->group(function(){
     Route::get('/eliminarAlquiler/{id}', [App\Http\Controllers\UserController::class, 'confirmarEliminacionAlquiler'])->middleware('anfitrionAlquilerEliminar');
     Route::post('/eliminarAlquiler/{id}', [App\Http\Controllers\UserController::class, 'eliminarAlquiler']);
     Route::get('/misviajes',[App\Http\Controllers\UserController::class, 'misviajes']);
-    Route::get('/valorar/{id}',[App\Http\Controllers\UserController::class, 'formValorar']);
+    Route::get('/valorar/{id}',[App\Http\Controllers\UserController::class, 'formValorar'])->middleware('valorarUnoMismo');
     Route::post('/valorar/{id}',[App\Http\Controllers\UserController::class, 'guardarValoracion']);
     Route::get('/valoraciones/{id}',[App\Http\Controllers\UserController::class, 'listarValoraciones']);
-    Route::get('/eliminarValoracion/{id}', [App\Http\Controllers\UserController::class, 'confirmarEliminacionValoracion']);
+    Route::get('/eliminarValoracion/{id}', [App\Http\Controllers\UserController::class, 'confirmarEliminacionValoracion'])->middleware('hiceValoracion');
     Route::post('/eliminarValoracion/{id}', [App\Http\Controllers\UserController::class, 'eliminarValoracion']);
     Route::get('/saldo',[App\Http\Controllers\UserController::class, 'formAddSaldo']);
     Route::post('/saldo',[App\Http\Controllers\UserController::class, 'addSaldo']);

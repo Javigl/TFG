@@ -70,5 +70,7 @@ class Kernel extends HttpKernel
         'anfitrionAlquiler' => \App\Http\Middleware\AnfitrionAlquiler::class,
         'solicitanteAlquiler' => \App\Http\Middleware\SolicitanteAlquiler::class,
         'anfitrionAlquilerEliminar' => \App\Http\Middleware\AnfitrionAlquilerEliminar::class,
+        'valorarUnoMismo' => \App\Http\Middleware\ValorarUnoMismo::class,
+        'hiceValoracion' => \App\Http\Middleware\HiceValoracion::class,
     ];
 }
